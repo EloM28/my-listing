@@ -1000,3 +1000,14 @@ body {
   .footer-social { width: 38px; height: 38px; font-size: 1.2rem; }
   .shape1, .shape2, .shape3, .shape4, .shape5 { opacity: 0.4; }
 }
+
+@media (max-width: 991.98px) {
+  .custom-navbar-glass .container-fluid {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .navbar-brand.logo {
+    margin-right: 0 !important;
+  }
+}
