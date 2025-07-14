@@ -109,7 +109,7 @@ const Navbar = () => {
         </div>
         {/* Bloc centre : liens de navigation */}
         <div className="flex items-center gap-x-6 flex-shrink-0">
-          <a href="#" className="text-gray-700 hover:text-red-500 font-medium text-sm md:text-base">Home</a>
+          <Link to="/" className="text-gray-700 hover:text-red-500 font-medium text-sm md:text-base">Home</Link>
           {/* Dropdowns desktop */}
           <div className="relative group">
             <button className="px-2 py-2 hover:text-red-500 flex items-center gap-1 font-medium text-sm md:text-base">
