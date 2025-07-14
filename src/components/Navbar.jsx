@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -119,7 +120,7 @@ const Navbar = () => {
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</a>
+              <Link to="/ListingPage" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
             </div>
           </div>
