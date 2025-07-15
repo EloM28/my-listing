@@ -232,12 +232,17 @@ const Navbar = () => {
           <div className="fixed inset-0 bg-black bg-opacity-40 z-40" onClick={() => setIsDrawerOpen(false)}></div>
           <div className="fixed top-0 left-0 h-full w-80 max-w-full bg-white z-50 shadow-lg transition-transform duration-300 transform translate-x-0">
             <div className="flex items-center justify-between px-4 py-4 border-b">
-              <span className="font-bold text-red-500 text-lg">Home</span>
+              {/* <span className="font-bold text-red-500 text-lg"></span> */}
               <button onClick={() => setIsDrawerOpen(false)} aria-label="Close menu">
                 <svg className="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
             <div className="flex flex-col divide-y divide-gray-200">
+            <Link to="/"
+                className="w-full flex items-center justify-between px-4 py-3 font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none"
+                onClick={() => setIsDrawerOpen(false)}>
+                  Home
+            </Link>
               {Object.entries(mobileDropdowns).map(([key, items]) => (
                 <div key={key}>
                   <button
