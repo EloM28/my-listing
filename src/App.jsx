@@ -5,7 +5,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
-import SearchBox from './components/SearchBox'
 import CategoryFilter from './components/CategoryFilter';
 import RecentListings from './components/RecentListings';
 import ListingPage from './components/ListingPage';
