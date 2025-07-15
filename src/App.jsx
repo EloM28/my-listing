@@ -9,6 +9,7 @@ import CategoryFilter from './components/CategoryFilter';
 import RecentListings from './components/RecentListings';
 import ListingPage from './components/ListingPage';
 import ListingSaleGrid from './components/ListingSaleGrid';
+import RentList from './components/RentList';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             
           } />
           <Route path="/ListingPage" element={<ListingPage />} />
+          <Route path="/rentlist" element={<RentList />} />
         </Routes>
       </div>
     </Router>

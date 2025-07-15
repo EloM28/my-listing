@@ -63,10 +63,10 @@ const ListingPage = () => {
 
   return (
     <>
-    <div className="fixed top-0 left-0 w-full z-50">
+    {/* <div className="fixed top-0 left-0 w-full z-50"> */}
         <Navbar />
-    </div>
-    <div className="bg-gray-50 min-h-screen pb-8 pt-16">
+    {/* </div> */}
+    <div className="bg-gray-50 min-h-screen pb-8">
     {/* <div className="bg-gray-50 min-h-screen pb-8"> */}
       {/* Barre de filtres */}
       <div className="bg-white border-t py-4 px-4">
