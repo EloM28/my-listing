@@ -112,11 +112,11 @@ const Navbar = () => {
           <Link to="/" className="text-gray-700 hover:text-red-500 font-medium text-sm md:text-base">Home</Link>
           {/* Dropdowns desktop */}
           <div className="relative group">
-            <button className="px-2 py-2 hover:text-red-500 flex items-center gap-1 font-medium text-sm md:text-base">
+            <button className="px-2 py-2 flex items-center gap-1 font-medium text-sm md:text-base transition-colors group-hover:text-red-500 hover:text-red-500 focus:text-red-500">
               Explore
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20">
+            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
@@ -125,21 +125,21 @@ const Navbar = () => {
             </div>
           </div>
           <div className="relative group">
-            <button className="px-2 py-2 hover:text-red-500 flex items-center gap-1 font-medium text-sm md:text-base">
+            <button className="px-2 py-2 flex items-center gap-1 font-medium text-sm md:text-base transition-colors group-hover:text-red-500 hover:text-red-500 focus:text-red-500">
               Listings
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20">
+            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
             </div>
           </div>
           <div className="relative group">
-            <button className="px-2 py-2 hover:text-red-500 flex items-center gap-1 font-medium text-sm md:text-base">
+            <button className="px-2 py-2 flex items-center gap-1 font-medium text-sm md:text-base transition-colors group-hover:text-red-500 hover:text-red-500 focus:text-red-500">
               More
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20">
+            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop 2</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add listing 3</a>
