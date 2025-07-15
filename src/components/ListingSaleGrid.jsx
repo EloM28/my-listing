@@ -1,5 +1,6 @@
 import React from "react";
 import ListingSaleCard from "./ListingSaleCard";
+import TestimonialSection from "./TestimonialSection";
 
 const listings = [
   {
@@ -38,11 +39,17 @@ const listings = [
 ];
 
 const ListingSaleGrid = () => (
-  <div className="flex flex-wrap gap-8 justify-center mt-8">
-    {listings.map((item, idx) => (
-      <ListingSaleCard key={idx} {...item} />
-    ))}
-  </div>
+  <>
+    <section py-12>
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10">Recent listings for sale</h2>
+      <div className="flex flex-wrap gap-8 justify-center mt-8">
+        {listings.map((item, idx) => (
+          <ListingSaleCard key={idx} {...item} />
+        ))}
+      </div>
+    </section>
+    <TestimonialSection />
+  </>
 );
 
 export default ListingSaleGrid; 
