@@ -108,7 +108,7 @@ const Navbar = () => {
           </div>
         </div>
         {/* Bloc centre : liens de navigation */}
-        <div className="hidden lg:flex items-center flex-shrink-0">
+        <div className="hidden lg:flex items-center gap-x-2 lg:gap-x-3 flex-shrink-0">
           <Link to="/" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Home</Link>
           {/* Dropdowns desktop */}
           <div className="relative group">
@@ -130,7 +130,7 @@ const Navbar = () => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
             <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</a>
+              <Link to="/rentlist" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
             </div>
           </div>
