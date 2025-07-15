@@ -41,9 +41,9 @@ const RecentListings = () => {
     <section className="py-12">
       <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10">Recent listings for rent</h2>
       <div className="flex flex-wrap gap-y-8 gap-x-6 justify-center px-2 sm:px-4">
-        {listings.map((item, idx) => (
+     {listings.map((item, idx) => (
           <div key={idx} className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col w-full max-w-sm mx-auto my-4">
-            {/* Image + badge prix */}
+       {/* Image + badge prix */}
             <div className="relative h-48 sm:h-56 w-full">
               <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
               <div className="absolute top-3 left-3 flex items-center gap-2">
