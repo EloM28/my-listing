@@ -72,9 +72,9 @@ const Navbar = () => {
         {/* Bloc gauche : logo + search */}
         <div className="flex items-center gap-x-2 lg:gap-x-3 min-w-0 flex-1">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 flex-shrink-0">
+          <Link to="/" className="flex items-center gap-2 flex-shrink-0">
             <svg className="w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0h6" /></svg>
-          </a>
+          </Link>
           {/* Search */}
           <div className="relative flex items-center w-48 md:w-64 lg:w-80 h-8 md:h-10 lg:h-12" ref={searchRef}>
             <svg className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" /></svg>
@@ -110,40 +110,58 @@ const Navbar = () => {
         {/* Bloc centre : liens de navigation */}
         <div className="hidden lg:flex items-center gap-x-2 lg:gap-x-3 flex-shrink-0">
           <Link to="/" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Home</Link>
-          {/* Dropdowns desktop */}
-          <div className="relative group">
+          {/* Dropdowns desktop avec gestion d'état */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown('Explore')}
+            onMouseLeave={() => setOpenDropdown('')}
+          >
             <button className="px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2 flex items-center gap-1 font-medium text-xs md:text-sm lg:text-base transition-colors group-hover:text-red-500 hover:text-red-500 focus:text-red-500 h-8 md:h-10 lg:h-12">
               Explore
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
-              <Link to="/ListingPage" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
-            </div>
+            {openDropdown === 'Explore' && (
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
+                <Link to="/ListingPage" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
+              </div>
+            )}
           </div>
-          <div className="relative group">
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown('Listings')}
+            onMouseLeave={() => setOpenDropdown('')}
+          >
             <button className="px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2 flex items-center gap-1 font-medium text-xs md:text-sm lg:text-base transition-colors group-hover:text-red-500 hover:text-red-500 focus:text-red-500 h-8 md:h-10 lg:h-12">
               Listings
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
-              <Link to="/rentlist" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
-            </div>
+            {openDropdown === 'Listings' && (
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
+                <Link to="/rentlist" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
+              </div>
+            )}
           </div>
-          <div className="relative group">
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown('More')}
+            onMouseLeave={() => setOpenDropdown('')}
+          >
             <button className="px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2 flex items-center gap-1 font-medium text-xs md:text-sm lg:text-base transition-colors group-hover:text-red-500 hover:text-red-500 focus:text-red-500 h-8 md:h-10 lg:h-12">
               More
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none group-hover:pointer-events-auto">
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop 2</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add listing 3</a>
-            </div>
+            {openDropdown === 'More' && (
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop 2</a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add listing 3</a>
+              </div>
+            )}
           </div>
         </div>
         {/* Bloc droit : icônes, sign in, bouton add listing */}
@@ -235,6 +253,7 @@ const Navbar = () => {
                         key={item.label}
                         to={item.href}
                         className="block px-8 py-2 text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsDrawerOpen(false)}
                       >
                         {item.label}
                       </Link>
