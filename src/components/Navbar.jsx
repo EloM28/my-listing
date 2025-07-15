@@ -32,7 +32,7 @@ const Navbar = () => {
       { label: "Explore", href: "#" },
       { label: "Explore 2", href: "#" },
       { label: "Explore 3", href: "#" },
-      { label: "Explore 4", href: "#" },
+      { label: "Explore 4", href: "/ListingPage" },
       { label: "Explore 5", href: "#" },
     ],
     Listings: [
@@ -231,13 +231,13 @@ const Navbar = () => {
                   </button>
                   <div className={`bg-white transition-all duration-200 overflow-hidden ${openDropdown === key ? "max-h-96" : "max-h-0"}`}>
                     {items.map((item) => (
-                      <a
+                      <Link
                         key={item.label}
-                        href={item.href}
+                        to={item.href}
                         className="block px-8 py-2 text-gray-700 hover:bg-gray-100"
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
