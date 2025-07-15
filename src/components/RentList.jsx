@@ -50,7 +50,6 @@ const listings = [
 const RentList = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
-      <RentListNavbar />
       <RentListHeader />
       <RentListTabs />
       <RentListActions />
@@ -99,15 +98,13 @@ const RentList = () => {
       </div>
       {/* Section des cards en bas */}
       <div className="max-w-7xl mx-auto mt-10 px-4">
-        <h2 className="text-2xl font-bold mb-6">Similar Listings</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10">Similar Listings</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {listings.map((item, idx) => (
             <ListingSaleCard key={idx} {...item} />
           ))}
         </div>
       </div>
-      {/* Footer */}
-      <RentListFooter />
     </div>
   );
 };
