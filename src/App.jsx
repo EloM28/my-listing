@@ -10,15 +10,17 @@ import RecentListings from './components/RecentListings';
 import ListingPage from './components/ListingPage';
 import ListingSaleGrid from './components/ListingSaleGrid';
 import RentList from './components/RentList';
+import FooterSection from "./components/FooterSection";
+
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
+      <Navbar />
         <Routes>
           <Route path="/" element={
             <>
-            <Navbar />
             <div className="relative">
               <HeroSection />
             </div>
@@ -33,6 +35,7 @@ function App() {
           <Route path="/ListingPage" element={<ListingPage />} />
           <Route path="/rentlist" element={<RentList />} />
         </Routes>
+       <FooterSection />
       </div>
     </Router>
   );
