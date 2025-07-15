@@ -9,6 +9,7 @@ import SearchBox from './components/SearchBox'
 import CategoryFilter from './components/CategoryFilter';
 import RecentListings from './components/RecentListings';
 import ListingPage from './components/ListingPage';
+import ListingSaleGrid from './components/ListingSaleGrid';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <div className="pt-2">
               <CategoryFilter />
               <RecentListings />
+              <ListingSaleGrid />
             </div>
             </>
             
