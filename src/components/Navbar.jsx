@@ -121,7 +121,7 @@ const Navbar = () => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
             {openDropdown === 'Explore' && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
+              <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
@@ -140,7 +140,7 @@ const Navbar = () => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
             {openDropdown === 'Listings' && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
+              <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
                 <Link to="/rentlist" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
               </div>
@@ -156,7 +156,7 @@ const Navbar = () => {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
             {openDropdown === 'More' && (
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded shadow-lg z-20">
+              <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop 2</a>
                 <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add listing 3</a>
