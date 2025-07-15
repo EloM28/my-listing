@@ -27,7 +27,7 @@ const FooterSection = () => (
       <div className="text-gray-500 text-sm flex items-center gap-1">
         <span>© Made with</span>
         <span className="text-[#ff4d5a] text-lg">♥</span>
-        <span>by 27collective</span>
+        <span>by NexusX</span>
       </div>
     </div>
   </footer>
