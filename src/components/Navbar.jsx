@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -108,7 +109,7 @@ const Navbar = () => {
         </div>
         {/* Bloc centre : liens de navigation */}
         <div className="flex items-center gap-x-6 flex-shrink-0">
-          <a href="#" className="text-gray-700 hover:text-red-500 font-medium text-sm md:text-base">Home</a>
+          <Link to="/" className="text-gray-700 hover:text-red-500 font-medium text-sm md:text-base">Home</Link>
           {/* Dropdowns desktop */}
           <div className="relative group">
             <button className="px-2 py-2 hover:text-red-500 flex items-center gap-1 font-medium text-sm md:text-base">
@@ -119,7 +120,7 @@ const Navbar = () => {
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</a>
+              <Link to="/ListingPage" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
             </div>
           </div>
