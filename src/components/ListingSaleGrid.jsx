@@ -1,7 +1,6 @@
 import React from "react";
 import ListingSaleCard from "./ListingSaleCard";
 import TestimonialSection from "./TestimonialSection";
-import FooterSection from "./FooterSection";
 
 const listings = [
   {
@@ -50,7 +49,6 @@ const ListingSaleGrid = () => (
       </div>
     </section>
     <TestimonialSection />
-    <FooterSection />
   </>
 );
 
