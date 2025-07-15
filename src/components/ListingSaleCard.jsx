@@ -73,7 +73,7 @@ const ListingSaleCard = ({
       </div>
     </div>
     {/* Actions */}
-    <div className="flex justify-center gap-4 py-4">
+    <div className="flex justify-center border-t-1 border-gray-200 gap-4 py-4">
       <button className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-200 transition">
         <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10" />
