@@ -70,7 +70,7 @@ const Navbar = () => {
       {/* Desktop navbar */}
       <div className="hidden lg:flex items-center justify-between px-4 lg:px-8 py-2 md:py-3 lg:py-4 w-full">
         {/* Bloc gauche : logo + search */}
-        <div className="flex items-center gap-x-2 md:gap-x-4 lg:gap-x-6 min-w-0 flex-1">
+        <div className="flex items-center gap-x-2 lg:gap-x-3 min-w-0 flex-1">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 flex-shrink-0">
             <svg className="w-8 h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l9-9 9 9M4 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0h6" /></svg>
@@ -108,7 +108,7 @@ const Navbar = () => {
           </div>
         </div>
         {/* Bloc centre : liens de navigation */}
-        <div className="hidden lg:flex items-center gap-x-2 md:gap-x-2 lg:gap-x-6 flex-shrink-0">
+        <div className="hidden lg:flex items-center flex-shrink-0">
           <Link to="/" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Home</Link>
           {/* Dropdowns desktop */}
           <div className="relative group">
@@ -147,7 +147,7 @@ const Navbar = () => {
           </div>
         </div>
         {/* Bloc droit : icônes, sign in, bouton add listing */}
-        <div className="flex items-center gap-x-1 md:gap-x-2 lg:gap-x-4 flex-shrink-0 ml-2 md:ml-4 lg:ml-8">
+        <div className="flex items-center gap-x-2 lg:gap-x-3 flex-shrink-0 ml-2 lg:ml-2">
           <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.797.755 6.879 2.047M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
           </a>
