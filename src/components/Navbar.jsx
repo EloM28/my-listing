@@ -122,11 +122,11 @@ const Navbar = () => {
             </button>
             {openDropdown === 'Explore' && (
               <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
-                <Link to="/ListingPage" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
+                <Link to="/ListingPage" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
               </div>
             )}
           </div>
@@ -141,8 +141,8 @@ const Navbar = () => {
             </button>
             {openDropdown === 'Listings' && (
               <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
-                <Link to="/rentlist" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
+                <Link to="/rentlist" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
               </div>
             )}
           </div>
@@ -157,9 +157,9 @@ const Navbar = () => {
             </button>
             {openDropdown === 'More' && (
               <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop 2</a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add listing 3</a>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop 2</a>
+                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add listing 3</a>
               </div>
             )}
           </div>
