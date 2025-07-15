@@ -1,53 +1,39 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import ListingSaleCard from "./ListingSaleCard"
 
 const listings = [
   {
-    id: 1,
-    title: "Union square",
+    image: "/uploads/sites/7/2019/11/r2-2-768x512.jpg",
+    price: "$3,200,000",
+    name: "Era square",
     address: "South Figueroa Street",
-    price: 4500,
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
     area: 1250,
     rooms: 4,
-    baths: 3,
+    bathrooms: 3,
     beds: 3,
     featured: true,
   },
   {
-    id: 2,
-    title: "Zaetta Studio",
+    image: "/uploads/sites/7/2019/11/n1-1-768x575.jpg",
+    price: "$4,500,000",
+    name: "Berlin Complex",
+    address: "South Olive Street",
+    area: 1170,
+    rooms: 3,
+    bathrooms: 2,
+    beds: 2,
+    featured: false,
+  },
+  {
+    image: "/uploads/sites/7/2019/11/n2-2-768x524.jpg",
+    price: "$1,800,000",
+    name: "Chelsea point",
     address: "Columbia Ave",
-    price: 2800,
-    img: "https://images.unsplash.com/photo-1460518451285-97b6aa326961?auto=format&fit=crop&w=600&q=80",
     area: 4500,
     rooms: 7,
-    baths: 3,
+    bathrooms: 3,
     beds: 12,
-    featured: false,
-  },
-  {
-    id: 3,
-    title: "Elegant Apartment",
-    address: "South Olive Street",
-    price: 1900,
-    img: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80",
-    area: 1170,
-    rooms: 3,
-    baths: 2,
-    beds: 2,
-    featured: false,
-  },
-  {
-    id: 4,
-    title: "Elegant Apartment",
-    address: "South Olive Street",
-    price: 1900,
-    img: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80",
-    area: 1170,
-    rooms: 3,
-    baths: 2,
-    beds: 2,
     featured: false,
   },
 ];
@@ -63,9 +49,6 @@ const ListingPage = () => {
 
   return (
     <>
-    {/* <div className="fixed top-0 left-0 w-full z-50"> */}
-        <Navbar />
-    {/* </div> */}
     <div className="bg-gray-50 min-h-screen pb-8">
     {/* <div className="bg-gray-50 min-h-screen pb-8"> */}
       {/* Barre de filtres */}
@@ -146,96 +129,9 @@ const ListingPage = () => {
         </div>
       </div>
       {/* Grille de résultats */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4">
-        {listings.map(listing => (
-          <div
-            key={listing.id}
-            className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col transition hover:shadow-lg"
-          >
-            {/* Image & badges */}
-            <div className="relative">
-              <img
-                src={listing.img}
-                alt={listing.title}
-                className="w-full h-48 object-cover"
-              />
-
-              {/* Price */}
-              <div className="absolute top-3 left-3 bg-white/90 text-gray-900 px-3 py-1 rounded font-semibold text-sm border border-white shadow">
-                ${listing.price.toLocaleString()} PER MONTH
-              </div>
-
-              {/* Featured badge */}
-              {listing.featured && (
-                <div className="absolute top-3 right-3 bg-yellow-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                </div>
-              )}
-
-              {/* Location */}
-              <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-rose-500 text-white px-4 py-2 rounded-full shadow">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414A6 6 0 1 0 12.414 13.414l4.243 4.243a1 1 0 0 0 1.414-1.414z" />
-                </svg>
-                <div>
-                  <div className="font-bold text-sm leading-tight">{listing.title}</div>
-                  <div className="text-xs opacity-80">{listing.address}</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Description with icons */}
-            <div className="flex justify-around text-center text-sm text-gray-700 px-6 py-4">
-              <div className="flex flex-col items-center">
-                <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 21h16M4 10h16M10 3h4" />
-                </svg>
-                {listing.area} sq ft
-              </div>
-              <div className="flex flex-col items-center">
-                <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 17v-6a4 4 0 1 1 8 0v6" />
-                </svg>
-                {listing.rooms} rooms
-              </div>
-              <div className="flex flex-col items-center">
-                <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 10V6a5 5 0 0 1 10 0v4" />
-                </svg>
-                {listing.baths} bathrooms
-              </div>
-              <div className="flex flex-col items-center">
-                <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M20 21v-2a4 4 0 0 0-3-3.87" />
-                </svg>
-                {listing.beds} beds
-              </div>
-            </div>
-
-            {/* Red separator */}
-            <div className="w-full border-t border-[#ddd]" />
-
-            {/* Action buttons */}
-            <div className="flex justify-center gap-4 py-4 bg-white">
-              <button className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition">
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 18 14.158V11a6 6 0 1 0-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 0 1-6 0v-1m6 0H9" />
-                </svg>
-              </button>
-              <button className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition">
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 0 1 6.364 0L12 7.636l1.318-1.318a4.5 4.5 0 1 1 6.364 6.364L12 21.682l-7.682-7.682a4.5 4.5 0 0 1 0-6.364z" />
-                </svg>
-              </button>
-              <button className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 transition">
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </button>
-            </div>
-          </div>
+      <div className="flex flex-wrap gap-8 justify-center mt-8">
+        {listings.map((item, idx) => (
+          <ListingSaleCard key={idx} {...item} />
         ))}
       </div>
       {/* Drawer de filtres */}
