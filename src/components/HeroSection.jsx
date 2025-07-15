@@ -17,7 +17,7 @@ const HeroSection = () => {
         <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight mb-6 sm:mb-8 text-center max-w-xs sm:max-w-xl md:max-w-3xl">
           Find your next<br />apartment or home
         </h1>
-        <div className="flex gap-2 mb-4 sm:mb-6 flex-col sm:flex-row items-center">
+        <div className="flex gap-2 mb-4 sm:mb-6 flex-row items-center">
           <button
             className={`flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2 rounded-tl-lg rounded-bl-lg border border-r-0 border-white text-base sm:text-lg font-semibold transition-colors duration-200 ${activeTab === "rent" ? "bg-white text-gray-900" : "bg-transparent text-white hover:bg-white/20"}`}
             onClick={() => setActiveTab("rent")}
