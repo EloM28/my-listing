@@ -17,9 +17,41 @@ const AuthForm = () => {
   // Erreur (exemple)
   const [error, setError] = useState("");
 
+  // Champs supplémentaires pour owner
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [profilePic, setProfilePic] = useState(null);
+  const [profilePicError, setProfilePicError] = useState("");
+  const [socialLinks, setSocialLinks] = useState([]);
+  const [newSocial, setNewSocial] = useState("");
+
+  // Gestion upload image
+  const handleProfilePic = (e) => {
+    const file = e.target.files[0];
+    if (file && file.size > 1024 * 1024) {
+      setProfilePicError("Maximum file size: 1 MB.");
+      setProfilePic(null);
+    } else {
+      setProfilePicError("");
+      setProfilePic(file);
+    }
+  };
+
+  // Ajout d'un réseau social
+  const handleAddSocial = () => {
+    if (newSocial.trim()) {
+      setSocialLinks([...socialLinks, newSocial.trim()]);
+      setNewSocial("");
+    }
+  };
+
+  // Suppression d'un réseau social
+  const handleRemoveSocial = (idx) => {
+    setSocialLinks(socialLinks.filter((_, i) => i !== idx));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simuler une erreur pour la démo
     setError("Invalid data");
   };
 
@@ -66,50 +98,146 @@ const AuthForm = () => {
                     onChange={() => setRole("owner")}
                     className="accent-red-500"
                   />
-                  <span>Property owner</span>
+                  <span className="font-semibold">Property owner</span>
                 </label>
               </div>
             </div>
           )}
-          <div>
-            <label className="block text-sm text-gray-700 mb-1">Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
-              required
-            />
-          </div>
-          {isRegister && (
-            <div>
-              <label className="block text-sm text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
-                required
-              />
-            </div>
+          {/* Formulaire spécifique pour owner */}
+          {isRegister && role === "owner" && (
+            <>
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">First Name</label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
+                  className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">Last Name</label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
+                  className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                  required
+                />
+              </div>
+              <div className="relative">
+                <label className="block text-sm text-gray-700 mb-1">Password</label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  className="w-full border-b border-gray-300 py-2 outline-none bg-transparent pr-8"
+                  required
+                />
+                <span
+                  className="absolute right-2 top-8 cursor-pointer text-gray-500"
+                  onClick={() => setShowPassword(s => !s)}
+                  title={showPassword ? "Hide" : "Show"}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0c0 3.866-3.582 7-8 7s-8-3.134-8-7 3.582-7 8-7 8 3.134 8 7z" /></svg>
+                </span>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">Profile Picture</label>
+                <div className="flex flex-col items-start gap-1">
+                  <label className="w-24 h-24 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer rounded-md">
+                    {profilePic ? (
+                      <img src={URL.createObjectURL(profilePic)} alt="Preview" className="w-full h-full object-cover rounded-md" />
+                    ) : (
+                      <>
+                        <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v6m0 0l-3-3m3 3l3-3m-6-6h.01" /></svg>
+                        <span className="text-xs text-gray-400">Upload</span>
+                      </>
+                    )}
+                    <input type="file" accept="image/*" className="hidden" onChange={handleProfilePic} />
+                  </label>
+                  <span className="text-xs text-gray-500 mt-1">Maximum file size: 1 MB.</span>
+                  {profilePicError && <span className="text-xs text-red-500">{profilePicError}</span>}
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">Social Networks</label>
+                <div className="flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    value={newSocial}
+                    onChange={e => setNewSocial(e.target.value)}
+                    className="flex-1 border-b border-gray-300 py-2 outline-none bg-transparent"
+                    placeholder="Paste link (ex: https://...)"
+                  />
+                  <button type="button" onClick={handleAddSocial} className="bg-gray-100 px-4 py-2 rounded text-gray-700">Add</button>
+                </div>
+                <ul className="flex flex-col gap-1">
+                  {socialLinks.map((link, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm">
+                      <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline break-all flex-1">{link}</a>
+                      <button type="button" onClick={() => handleRemoveSocial(idx)} className="text-red-500 text-xs">Remove</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
           )}
-          <div className="relative">
-            <label className="block text-sm text-gray-700 mb-1">Password</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              className="w-full border-b border-gray-300 py-2 outline-none bg-transparent pr-8"
-              required
-            />
-            <span
-              className="absolute right-2 top-8 cursor-pointer text-gray-500"
-              onClick={() => setShowPassword(s => !s)}
-              title={showPassword ? "Hide" : "Show"}
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0c0 3.866-3.582 7-8 7s-8-3.134-8-7 3.582-7 8-7 8 3.134 8 7z" /></svg>
-            </span>
-          </div>
+          {/* Formulaire simple pour customer ou sign in */}
+          {(!isRegister || role === "customer") && (
+            <>
+              <div>
+                <label className="block text-sm text-gray-700 mb-1">Username</label>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                  required
+                />
+              </div>
+              {isRegister && (
+                <div>
+                  <label className="block text-sm text-gray-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                    required
+                  />
+                </div>
+              )}
+              <div className="relative">
+                <label className="block text-sm text-gray-700 mb-1">Password</label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  className="w-full border-b border-gray-300 py-2 outline-none bg-transparent pr-8"
+                  required
+                />
+                <span
+                  className="absolute right-2 top-8 cursor-pointer text-gray-500"
+                  onClick={() => setShowPassword(s => !s)}
+                  title={showPassword ? "Hide" : "Show"}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0c0 3.866-3.582 7-8 7s-8-3.134-8-7 3.582-7 8-7 8 3.134 8 7z" /></svg>
+                </span>
+              </div>
+            </>
+          )}
           <button
             type="submit"
             className="bg-red-500 hover:bg-red-600 text-white font-semibold text-lg px-6 py-3 rounded transition-colors duration-200 w-full flex items-center justify-center gap-2 mt-2"
