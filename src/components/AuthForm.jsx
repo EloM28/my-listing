@@ -37,11 +37,25 @@ const AuthForm = () => {
     }
   };
 
+  const SOCIAL_OPTIONS = [
+    { label: "Facebook", value: "facebook" },
+    { label: "X", value: "x" },
+    { label: "Instagram", value: "instagram" },
+    { label: "YouTube", value: "youtube" },
+    { label: "Snapchat", value: "snapchat" },
+  ];
+
+  const [showAddSocial, setShowAddSocial] = useState(false);
+  const [selectedNetwork, setSelectedNetwork] = useState("");
+  const [socialUrl, setSocialUrl] = useState("");
+
   // Ajout d'un réseau social
   const handleAddSocial = () => {
-    if (newSocial.trim()) {
-      setSocialLinks([...socialLinks, newSocial.trim()]);
-      setNewSocial("");
+    if (selectedNetwork && socialUrl.trim()) {
+      setSocialLinks([...socialLinks, { network: selectedNetwork, url: socialUrl.trim() }]);
+      setSelectedNetwork("");
+      setSocialUrl("");
+      setShowAddSocial(false);
     }
   };
 
@@ -173,24 +187,72 @@ const AuthForm = () => {
               </div>
               <div>
                 <label className="block text-sm text-gray-700 mb-1">Social Networks</label>
-                <div className="flex gap-2 mb-2">
-                  <input
-                    type="text"
-                    value={newSocial}
-                    onChange={e => setNewSocial(e.target.value)}
-                    className="flex-1 border-b border-gray-300 py-2 outline-none bg-transparent"
-                    placeholder="Paste link (ex: https://...)"
-                  />
-                  <button type="button" onClick={handleAddSocial} className="bg-gray-100 px-4 py-2 rounded text-gray-700">Add</button>
-                </div>
-                <ul className="flex flex-col gap-1">
-                  {socialLinks.map((link, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm">
-                      <a href={link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline break-all flex-1">{link}</a>
-                      <button type="button" onClick={() => handleRemoveSocial(idx)} className="text-red-500 text-xs">Remove</button>
-                    </li>
-                  ))}
-                </ul>
+                {/* Liste des réseaux déjà ajoutés */}
+                {socialLinks.length > 0 && (
+                  <ul className="flex flex-col gap-1 mb-2">
+                    {socialLinks.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-sm">
+                        <span className="font-semibold">{SOCIAL_OPTIONS.find(opt => opt.value === item.network)?.label || item.network}:</span>
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline break-all flex-1">{item.url}</a>
+                        <button type="button" onClick={() => handleRemoveSocial(idx)} className="text-red-500 text-xs">Remove</button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {/* Affichage du bouton Add ou du formulaire d'ajout */}
+                {!showAddSocial ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowAddSocial(true)}
+                    className="w-full bg-gray-100 text-gray-700 py-3 rounded text-base font-medium mb-2"
+                  >
+                    Add
+                  </button>
+                ) : (
+                  <div className="flex flex-col gap-2 mb-2">
+                    <div className="relative">
+                      <label className="block font-semibold mb-1">Select Network</label>
+                      <select
+                        value={selectedNetwork}
+                        onChange={e => setSelectedNetwork(e.target.value)}
+                        className="w-full border-b border-gray-300 py-2 outline-none bg-transparent appearance-none pr-8"
+                      >
+                        <option value="">Select Network</option>
+                        {SOCIAL_OPTIONS.map(opt => (
+                          <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
+                      </select>
+                      <span className="absolute right-2 top-8 pointer-events-none">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                      </span>
+                    </div>
+                    <div className="relative flex items-center">
+                      <input
+                        type="url"
+                        value={socialUrl}
+                        onChange={e => setSocialUrl(e.target.value)}
+                        className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                        placeholder="Enter URL..."
+                      />
+                      <button
+                        type="button"
+                        onClick={() => { setShowAddSocial(false); setSelectedNetwork(""); setSocialUrl(""); }}
+                        className="absolute left-1/2 -translate-x-1/2 bg-gray-100 rounded-full p-1 mt-2"
+                        title="Cancel"
+                      >
+                        <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleAddSocial}
+                      className="w-full bg-gray-100 text-gray-700 py-3 rounded text-base font-medium"
+                      disabled={!selectedNetwork || !socialUrl.trim()}
+                    >
+                      Add
+                    </button>
+                  </div>
+                )}
               </div>
             </>
           )}
