@@ -43,6 +43,11 @@ const AuthForm = () => {
     { label: "Instagram", value: "instagram" },
     { label: "YouTube", value: "youtube" },
     { label: "Snapchat", value: "snapchat" },
+    { label: "Facebook", value: "facebook" },
+    { label: "X", value: "x" },
+    { label: "Instagram", value: "instagram" },
+    { label: "YouTube", value: "youtube" },
+    { label: "Snapchat", value: "snapchat" },
   ];
 
   const [showAddSocial, setShowAddSocial] = useState(false);
@@ -169,21 +174,30 @@ const AuthForm = () => {
               </div>
               <div>
                 <label className="block text-sm text-gray-700 mb-1">Profile Picture</label>
-                <div className="flex flex-col items-start gap-1">
+                <div className="flex items-start gap-3">
+                  {/* Zone d'upload toujours visible */}
                   <label className="w-24 h-24 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center cursor-pointer rounded-md">
-                    {profilePic ? (
-                      <img src={URL.createObjectURL(profilePic)} alt="Preview" className="w-full h-full object-cover rounded-md" />
-                    ) : (
-                      <>
-                        <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v6m0 0l-3-3m3 3l3-3m-6-6h.01" /></svg>
-                        <span className="text-xs text-gray-400">Upload</span>
-                      </>
-                    )}
+                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12v6m0 0l-3-3m3 3l3-3m-6-6h.01" /></svg>
+                    <span className="text-xs text-gray-400">Upload</span>
                     <input type="file" accept="image/*" className="hidden" onChange={handleProfilePic} />
                   </label>
-                  <span className="text-xs text-gray-500 mt-1">Maximum file size: 1 MB.</span>
-                  {profilePicError && <span className="text-xs text-red-500">{profilePicError}</span>}
+                  {/* Image uploadée avec bouton suppression */}
+                  {profilePic && (
+                    <div className="relative w-20 h-20 flex-shrink-0">
+                      <img src={URL.createObjectURL(profilePic)} alt="Preview" className="w-full h-full object-cover rounded-md" />
+                      <button
+                        type="button"
+                        onClick={() => setProfilePic(null)}
+                        className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1 shadow"
+                        title="Remove"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                      </button>
+                    </div>
+                  )}
                 </div>
+                <span className="text-xs text-gray-500 mt-1 block">Maximum file size: 1 MB.</span>
+                {profilePicError && <span className="text-xs text-red-500 block">{profilePicError}</span>}
               </div>
               <div>
                 <label className="block text-sm text-gray-700 mb-1">Social Networks</label>
