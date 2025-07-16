@@ -343,19 +343,19 @@ const AuthForm = () => {
             )}
             <button
               type="submit"
-              className="bg-red-500 hover:bg-red-600 text-white font-semibold text-lg px-6 py-3 rounded transition-colors duration-200 w-full flex items-center justify-center gap-2 mt-2"
+              className="bg-red-500 hover:bg-red-600 text-white font-semibold text-lg px-6 py-3 rounded transition-colors duration-200 w-full flex items-center justify-center gap-2 mt-2 mb-4"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 21v-2a4 4 0 00-8 0v2M12 11a4 4 0 100-8 4 4 0 000 8z" /></svg>
               {isRegister ? "Sign Up" : "Sign in"}
             </button>
             {!isRegister && (
-              <div className="flex items-center mt-2">
+              <div className="flex items-center">
                 <input type="checkbox" className="accent-red-500 mr-2" id="remember" />
                 <label htmlFor="remember" className="text-gray-700 text-sm">Remember me</label>
               </div>
             )}
             {!isRegister && (
-              <div className="flex items-center mt-4">
+              <div className="flex items-center mb-4">
                 <span className="text-gray-400 mr-2">
                   <svg className="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 11c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3zm0 0V4m0 7v7" /></svg>
                 </span>
