@@ -1,5 +1,4 @@
 import React from "react";
-import RentListNavbar from "./RentListNavbar";
 import RentListHeader from "./RentListHeader";
 import RentListTabs from "./RentListTabs";
 import RentListActions from "./RentListActions";
@@ -8,7 +7,6 @@ import RentListAmenities from "./RentListAmenities";
 import RentListCategories from "./RentListCategories";
 import RentListLocation from "./RentListLocation";
 import RentListAuthor from "./RentListAuthor";
-import RentListFooter from "./RentListFooter";
 import RentListGallery from "./RentListGallery";
 
 const listings = [
