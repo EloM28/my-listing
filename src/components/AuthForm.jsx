@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+const USERS = [
+  { username: "alice", password: "alice123", role: "customer", name: "Alice" },
+  { username: "bob", password: "bob123", role: "owner", name: "Bob" },
+  { username: "kaam", password: "kaam123", role: "customer", name: "Kaam" },
+];
+
 const AuthForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -86,7 +92,23 @@ const AuthForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError("Invalid data");
+    if (!isRegister) {
+      // Sign in
+      const user = USERS.find(u => u.username === username && u.password === password);
+      if (user) {
+        if (user.role === "customer") {
+          // Simuler la connexion (localStorage/sessionStorage ou context normalement)
+          localStorage.setItem("user", JSON.stringify(user));
+          navigate("/dashboard");
+        } else {
+          setError("Access denied: only customers can sign in here.");
+        }
+      } else {
+        setError("Invalid username or password.");
+      }
+    } else {
+      setError("Invalid data");
+    }
   };
 
   return (
