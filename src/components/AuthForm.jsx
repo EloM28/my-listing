@@ -108,7 +108,7 @@ const AuthForm = () => {
               Register
             </Link>
           </div>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-h-[80vh] overflow-y-auto pr-2 scrollbar-none" style={{scrollbarWidth:'none', msOverflowStyle:'none'}}>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {isRegister && (
               <div className="mb-2">
                 <label className="block text-sm text-gray-700 mb-1">Choose role</label>
