@@ -43,11 +43,13 @@ const AuthForm = () => {
     { label: "Instagram", value: "instagram" },
     { label: "YouTube", value: "youtube" },
     { label: "Snapchat", value: "snapchat" },
-    { label: "Facebook", value: "facebook" },
-    { label: "X", value: "x" },
-    { label: "Instagram", value: "instagram" },
-    { label: "YouTube", value: "youtube" },
-    { label: "Snapchat", value: "snapchat" },
+    { label: "Tumblr", value: "tumblr" },
+    { label: "Linkedin", value: "linkedin" },
+    { label: "Reddit", value: "reddit" },
+    { label: "Pinterest", value: "pinterest" },
+    { label: "DeviantArt", value: "devianart" },
+    { label: "Vkontakte", value: "vkontakte" },
+    { label: "SoundCloud", value: "soundcloud" },
   ];
 
   const [showAddSocial, setShowAddSocial] = useState(false);
