@@ -51,7 +51,7 @@ const ExplorePage = () => {
         {/* Résultats (scrollable: ExplorePagination + ExploreResults seulement) */}
         <div className="flex-1 flex flex-col" style={{height: scrollHeight}}>
           <div className="flex-1 overflow-y-auto flex flex-col">
-            <div className="flex items-center justify-between px-2 mb-4">
+            <div className="flex items-center justify-between mb-4">
               <ExplorePagination />
             </div>
             <ExploreResults />
