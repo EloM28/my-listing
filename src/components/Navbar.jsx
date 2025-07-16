@@ -152,11 +152,7 @@ const Navbar = () => {
             </button>
             {openDropdown === 'Explore' && (
               <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
-                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore</a>
-                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 2</a>
-                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 3</a>
-                <Link to="/ListingPage" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 4</Link>
-                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 5</a>
+                <Link to="/ListingPage" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Explore 1</Link>
               </div>
             )}
           </div>
