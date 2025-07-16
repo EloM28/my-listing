@@ -63,11 +63,7 @@ const Navbar = () => {
 
   const mobileDropdowns = {
     Explore: [
-      { label: "Explore", href: "#" },
-      { label: "Explore 2", href: "#" },
-      { label: "Explore 3", href: "#" },
-      { label: "Explore 4", href: "/ListingPage" },
-      { label: "Explore 5", href: "#" },
+      { label: "Explore 1", href: "/explore" }
     ],
     Listings: [
       { label: "For rent listings", href: "/rentlist" },
@@ -306,9 +302,9 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <a href="#" className="text-gray-700 hover:text-red-500">
+          <Link to="/signin" className="text-gray-700 hover:text-red-500">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.797.755 6.879 2.047M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          </a>
+          </Link>
         </div>
       </div>
       {/* Drawer et recherche mobile (inchangés) */}
