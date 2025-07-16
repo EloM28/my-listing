@@ -42,7 +42,7 @@ const Navbar = () => {
     navigate('/');
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleClickOutside(event) {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setIsSearchOpen(false);
@@ -52,7 +52,7 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 768) setIsDrawerOpen(false);
       if (window.innerWidth >= 768) setIsMobileSearchOpen(false);
@@ -201,12 +201,15 @@ const Navbar = () => {
         {/* Bloc droit : icônes, sign in, bouton add listing */}
         <div className="flex items-center gap-x-1 lg:gap-x-2 flex-shrink-0 ml-2 lg:ml-2">
           {user ? (
-            <div className="relative" ref={userDropdownRef}>
+            <div
+              className="relative"
+              ref={userDropdownRef}
+              onMouseEnter={() => setUserDropdown(true)}
+              onMouseLeave={() => setUserDropdown(false)}
+            >
               <button
                 className="flex items-center gap-2 focus:outline-none"
                 onClick={() => setUserDropdown(d => !d)}
-                onMouseEnter={() => setUserDropdown(true)}
-                onMouseLeave={() => setUserDropdown(false)}
               >
                 <span className="bg-pink-200 text-pink-800 rounded-full w-8 h-8 flex items-center justify-center font-bold uppercase">{user.name[0]}</span>
                 <span className="font-medium text-gray-700 mx-1">{user.name}</span>
@@ -220,7 +223,7 @@ const Navbar = () => {
                       {item.danger ? (
                         <button
                           onClick={handleLogout}
-                          className="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-50 font-medium"
+                          className="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-50 font-medium cursor-pointer"
                         >
                           {item.label}
                         </button>
@@ -246,6 +249,9 @@ const Navbar = () => {
           )}
           <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
+          </a>
+          <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 15a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v8zm-2 0V7m0 8l-7-5-7 5" /></svg>
           </a>
           {user?.role !== "customer" && (
            <>
