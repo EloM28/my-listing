@@ -53,6 +53,19 @@ const AuthForm = () => {
   const [showAddSocial, setShowAddSocial] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState("");
   const [socialUrl, setSocialUrl] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = React.useRef();
+
+  // Fermer le dropdown si clic en dehors
+  React.useEffect(() => {
+    function handleClick(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    if (dropdownOpen) document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [dropdownOpen]);
 
   // Ajout d'un réseau social
   const handleAddSocial = () => {
@@ -224,21 +237,32 @@ const AuthForm = () => {
                   </button>
                 ) : (
                   <div className="flex flex-col gap-2 mb-2">
-                    <div className="relative">
-                      <label className="block font-semibold mb-1">Select Network</label>
-                      <select
-                        value={selectedNetwork}
-                        onChange={e => setSelectedNetwork(e.target.value)}
-                        className="w-full border-b border-gray-300 py-2 outline-none bg-transparent appearance-none pr-8"
+                    <div className="relative" ref={dropdownRef}>
+                      {/* <label className="block font-semibold mb-1">Select Network</label> */}
+                      <button
+                        type="button"
+                        className="w-full border-b border-gray-300 py-2 outline-none bg-transparent appearance-none pr-8 flex items-center justify-between"
+                        onClick={() => setDropdownOpen(o => !o)}
                       >
-                        <option value="">Select Network</option>
-                        {SOCIAL_OPTIONS.map(opt => (
-                          <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                      </select>
-                      <span className="absolute right-2 top-8 pointer-events-none">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-                      </span>
+                        {selectedNetwork ? (SOCIAL_OPTIONS.find(opt => opt.value === selectedNetwork)?.label) : "Select Network"}
+                        <span className="ml-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                        </span>
+                      </button>
+                      {dropdownOpen && (
+                        <div className="absolute left-0 right-0 bg-white border border-gray-200 rounded shadow-lg z-10 mt-1 max-h-52 overflow-y-auto" style={{maxHeight:'200px'}}>
+                          {SOCIAL_OPTIONS.map(opt => (
+                            <button
+                              type="button"
+                              key={opt.value}
+                              className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${selectedNetwork === opt.value ? 'font-bold bg-gray-50' : ''}`}
+                              onClick={() => { setSelectedNetwork(opt.value); setDropdownOpen(false); }}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <div className="relative flex items-center">
                       <input
