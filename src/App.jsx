@@ -13,6 +13,7 @@ import RentList from './components/RentList';
 import FooterSection from "./components/FooterSection";
 import AuthForm from './components/AuthForm';
 import ForgotPassword from './components/ForgotPassword';
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/signin" element={<AuthForm />} />
           <Route path="/register" element={<AuthForm />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
        <FooterSection />
       </div>
