@@ -12,6 +12,7 @@ import ListingSaleGrid from './components/ListingSaleGrid';
 import RentList from './components/RentList';
 import FooterSection from "./components/FooterSection";
 import AuthForm from './components/AuthForm';
+import ForgotPassword from './components/ForgotPassword';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/rentlist" element={<RentList />} />
           <Route path="/signin" element={<AuthForm />} />
           <Route path="/register" element={<AuthForm />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
        <FooterSection />
       </div>
