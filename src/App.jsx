@@ -11,6 +11,7 @@ import ListingPage from './components/ListingPage';
 import ListingSaleGrid from './components/ListingSaleGrid';
 import RentList from './components/RentList';
 import FooterSection from "./components/FooterSection";
+import AuthForm from './components/AuthForm';
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
           } />
           <Route path="/ListingPage" element={<ListingPage />} />
           <Route path="/rentlist" element={<RentList />} />
+          <Route path="/signin" element={<AuthForm />} />
+          <Route path="/register" element={<AuthForm />} />
         </Routes>
        <FooterSection />
       </div>
