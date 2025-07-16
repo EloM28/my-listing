@@ -14,6 +14,7 @@ import FooterSection from "./components/FooterSection";
 import AuthForm from './components/AuthForm';
 import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard';
+import ExplorePage from './components/ExplorePage';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/register" element={<AuthForm />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/explore" element={<ExplorePage />} />
         </Routes>
        <FooterSection />
       </div>
