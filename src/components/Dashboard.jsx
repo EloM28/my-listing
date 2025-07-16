@@ -13,13 +13,13 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="border-t border-gray-300 bg-white">
-        <div className="flex justify-center gap-12 pt-4">
+      <div className="bg-white border-b border-gray-200">
+        <div className="flex justify-center items-center gap-0">
           {tabs.map((tab, i) => (
             <button
               key={tab}
-              className={`font-semibold pb-2 border-b-2 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700'}`}
-              style={{minWidth:120}}
+              className={`font-bold text-base px-8 py-4 border-b-2 transition-colors duration-150 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700 hover:text-red-500'} ${i > 0 ? 'border-l border-gray-200' : ''}`}
+              style={{minWidth:140}}
             >
               {tab}
             </button>
