@@ -1,6 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+const userMenu = [
+  { label: "Dashboard", to: "/dashboard" },
+  { label: "My Listings", to: "#" },
+  { label: "Promotions", to: "#" },
+  { label: "Bookmarks", to: "#" },
+  { label: "Account Details", to: "#" },
+  { label: "Logout", to: "#logout", danger: true },
+];
+
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -9,11 +18,23 @@ const Navbar = () => {
   const searchRef = useRef(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const [userDropdown, setUserDropdown] = useState(false);
+  const userDropdownRef = useRef();
 
   useEffect(() => {
     const stored = localStorage.getItem('user');
     if (stored) setUser(JSON.parse(stored));
   }, []);
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target)) {
+        setUserDropdown(false);
+      }
+    }
+    if (userDropdown) document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [userDropdown]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -180,14 +201,43 @@ const Navbar = () => {
         {/* Bloc droit : icônes, sign in, bouton add listing */}
         <div className="flex items-center gap-x-1 lg:gap-x-2 flex-shrink-0 ml-2 lg:ml-2">
           {user ? (
-            <>
-              <span className="bg-pink-200 text-pink-800 rounded-full w-8 h-8 flex items-center justify-center font-bold uppercase">{user.name[0]}</span>
-              <span className="font-medium text-gray-700 mx-1">{user.name}</span>
-              <div className="hidden lg:flex gap-2">
-                <Link to="/dashboard" className="text-gray-700 hover:text-red-500 font-medium px-3 py-2">Dashboard</Link>
-                <button onClick={handleLogout} className="text-gray-700 hover:text-red-500 font-medium px-3 py-2">Logout</button>
-              </div>
-            </>
+            <div className="relative" ref={userDropdownRef}>
+              <button
+                className="flex items-center gap-2 focus:outline-none"
+                onClick={() => setUserDropdown(d => !d)}
+                onMouseEnter={() => setUserDropdown(true)}
+                onMouseLeave={() => setUserDropdown(false)}
+              >
+                <span className="bg-pink-200 text-pink-800 rounded-full w-8 h-8 flex items-center justify-center font-bold uppercase">{user.name[0]}</span>
+                <span className="font-medium text-gray-700 mx-1">{user.name}</span>
+                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+              {userDropdown && (
+                <div className="absolute right-0 w-56 bg-white rounded shadow-lg border border-gray-300 z-50 animate-fade-in">
+                  {userMenu.map((item, idx) => (
+                    <div key={item.label}>
+                      {idx > 0 && <div className="border-t border-gray-300" />}
+                      {item.danger ? (
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-50 font-medium"
+                        >
+                          {item.label}
+                        </button>
+                      ) : (
+                        <Link
+                          to={item.to}
+                          className="block px-4 py-3 text-gray-700 hover:bg-gray-50 font-medium"
+                          onClick={() => setUserDropdown(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <Link to="/signin" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Sign in</Link> or 
