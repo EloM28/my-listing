@@ -13,8 +13,8 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="border-b bg-white">
-        <div className="flex justify-center gap-12 py-6">
+      <div className="border-t border-gray-300 bg-white">
+        <div className="flex justify-center gap-12 pt-4">
           {tabs.map((tab, i) => (
             <button
               key={tab}
