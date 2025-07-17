@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const USERS = [
-  { username: "alice", password: "alice123", role: "customer", name: "Alice" },
-  { username: "bob", password: "bob123", role: "owner", name: "Bob" },
-  { username: "kaam", password: "kaam123", role: "customer", name: "Kaam" },
+  { username: "alice", password: "alice123",email:"alice@gmail.com", role: "customer", name: "Alice" },
+  { username: "bob", password: "bob123", email:"bob@gmail.com",role: "owner", name: "Bob" },
+  { username: "kaam", password: "kaam123", email:"kaam@gmail.com",role: "customer", name: "Kaam" },
 ];
 
 const AuthForm = () => {
