@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardTabs from "./DashboardTabs";
-
-const tabs = [
-  "Dashboard",
-  "My Listings",
-  "Promotions",
-  "Bookmarks",
-  "Account details",
-  "Logout"
-];
+import { dashboardTabsMenu } from "./dashboardTabsConfig";
 
 const AccountDetails = () => {
   const [user, setUser] = useState(null);
@@ -109,7 +101,7 @@ const AccountDetails = () => {
     <div className="min-h-screen bg-gray-100">
       {/* Header avec navigation */}
       <div className="bg-white border-b border-gray-200">
-        <DashboardTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
+        <DashboardTabs tabs={dashboardTabsMenu} activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
