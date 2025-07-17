@@ -2,15 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
-
 const DashboardTabs = ({ tabs, activeTab, onTabChange }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
-    navigate('/'); // Redirige vers la home après logout
+    navigate('/'); // Redirect to home after logout
   };
-
+  
   return (
     <div className="flex flex-wrap justify-center items-center">
       {tabs.map((tab, i) => (
