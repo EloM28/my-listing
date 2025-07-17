@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardTabs from "./DashboardTabs";
 import { dashboardTabsMenu } from "./dashboardTabsConfig";
+import { useAuth } from "./AuthContext";
 
 const AccountDetails = () => {
   const [user, setUser] = useState(null);
@@ -19,21 +20,23 @@ const AccountDetails = () => {
   });
   const navigate = useNavigate();
   const [activeTab] = useState("Account details");
+  const { user: authUser } = useAuth();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      setUser(userData);
+    if (!authUser) navigate('/signin');
+    else {
+      setUser(authUser);
       setFormData({
-        username: userData.name || "",
-        email: userData.email || "",
+        username: authUser.name || "",
+        email: authUser.email || "",
         currentPassword: "",
         newPassword: "",
         confirmPassword: ""
       });
     }
-  }, []);
+  }, [authUser, navigate]);
+
+  if (!user) return null;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -80,22 +83,6 @@ const AccountDetails = () => {
       navigate(`/dashboard?tab=${tabToParam[tab]}`);
     }
   };
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-gray-600">Please log in to view account details.</p>
-          <button 
-            onClick={() => navigate('/signin')}
-            className="mt-4 bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
-          >
-            Sign In
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-100">
