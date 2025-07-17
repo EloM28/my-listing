@@ -6,6 +6,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import Bookmarks from "./Bookmarks";
 import MyListings from "./MyListings";
 import Promotions from "./Promotions";
+import { useAuth } from "./AuthContext";
 
 
 // Map tab names to URL param values
@@ -28,7 +29,12 @@ const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Dashboard");
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) navigate('/signin');
+  }, [user, navigate]);
+  if (!user) return null;
 
   // Synchronise l'onglet actif avec l'URL
   useEffect(() => {
