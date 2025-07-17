@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 const tabs = [
   "Dashboard",
@@ -10,15 +10,29 @@ const tabs = [
 ];
 
 const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState("Dashboard");
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-white border-b border-gray-200">
-        <div className="flex flex-wrap justify-center items-center">
+        {/* <div className="flex justify-center items-center gap-0">
+          {tabs.map((tab, i) => (
+            <button
+              key={tab}
+              className={`font-bold text-base px-8 py-4 border-b-2 transition-colors duration-150 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700 hover:text-red-500'} ${i > 0 ? 'border-l border-gray-200' : ''}`}
+              style={{minWidth:140}}
+            >
+              {tab}
+            </button>
+          ))}
+        </div> */}
+        <div className="flex flex-wrap justify-center items-center" >
         {tabs.map((tab, i) => (
           <button
             key={tab}
-            className={`font-bold text-sm md:text-base px-4 md:px-8 py-3 md:py-4 border-b-2 transition-colors duration-150 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700 hover:text-red-500'} ${i > 0 ? 'border-l border-gray-200' : ''} flex-1 min-w-[100px] max-w-[150px]`}
+            onClick={() => setActiveTab(tab)}
+            className={`font-bold text-sm md:text-base px-4 md:px-8 py-3 md:py-4 border-b-2 transition-colors duration-150 
+              ${ activeTab === tab ? "border-red-500 text-gray-900" : "border-transparent text-gray-700 hover:text-red-500"} ${i > 0 ? 'border-l border-gray-200' : ''} flex-1 min-w-[100px] max-w-[150px]`}
           >
             {tab}
           </button>
