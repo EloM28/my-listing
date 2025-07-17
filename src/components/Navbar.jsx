@@ -24,16 +24,12 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState("");
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const searchRef = useRef(null);
-  const [user, setUser] = useState(null);
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [userDropdown, setUserDropdown] = useState(false);
   const userDropdownRef = useRef();
   const { logout } = useAuth();
 
-  useEffect(() => {
-    const stored = localStorage.getItem('user');
-    if (stored) setUser(JSON.parse(stored));
-  }, []);
 
   useEffect(() => {
     function handleClick(e) {
