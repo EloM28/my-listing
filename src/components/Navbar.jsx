@@ -74,7 +74,7 @@ const Navbar = () => {
     ],
     Listings: [
       { label: "For rent listings", href: "/rentlist" },
-      { label: "For sale listings", href: "#" },
+      { label: "For sale listings", href: "/salelist" },
     ],
     More: [
       { label: "Blog", href: "#" },
@@ -175,7 +175,7 @@ const Navbar = () => {
             {openDropdown === 'Listings' && (
               <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
                 <Link to="/rentlist" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For rent listings</Link>
-                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</a>
+                <Link to="/salelist" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">For sale listings</Link>
               </div>
             )}
           </div>
