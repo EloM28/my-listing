@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from './AuthContext';
 
 const USERS = [
   { username: "alice", password: "alice123",email:"alice@gmail.com", role: "customer", name: "Alice" },
@@ -10,6 +11,7 @@ const USERS = [
 const AuthForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { setUser } = useAuth();
   const isRegister = location.pathname === "/register";
 
   // Champs communs
@@ -99,6 +101,7 @@ const AuthForm = () => {
         if (user.role === "customer") {
           // Simuler la connexion (localStorage/sessionStorage ou context normalement)
           localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
           navigate("/dashboard");
         } else {
           setError("Access denied: only customers can sign in here.");
