@@ -1,14 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { dashboardTabsMenu } from "./dashboardTabsConfig";
 
-const userMenu = [
-  { label: "Dashboard", to: "/dashboard" },
-  { label: "My Listings", to: "#" },
-  { label: "Promotions", to: "#" },
-  { label: "Bookmarks", to: "#" },
-  { label: "Account Details", to: "/dashboard?tab=account" },
-  { label: "Logout", to: "#logout", danger: true },
-];
+const userMenu = dashboardTabsMenu.map(tab => {
+  if (tab.value === "Account details") {
+    return { label: tab.label, to: "/dashboard?tab=account", danger: tab.danger };
+  }
+  if (tab.value === "Dashboard") {
+    return { label: tab.label, to: "/dashboard", danger: tab.danger };
+  }
+  if (tab.value === "Logout") {
+    return { label: tab.label, to: "#logout", danger: tab.danger };
+  }
+  // Pour les autres, tu peux adapter les routes si besoin
+  return { label: tab.label, to: "#", danger: tab.danger };
+});
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
