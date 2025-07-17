@@ -15,6 +15,8 @@ import AuthForm from './components/AuthForm';
 import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard';
 import ExplorePage from './components/ExplorePage';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 
 function App() {
