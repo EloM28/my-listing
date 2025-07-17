@@ -133,6 +133,7 @@ const AuthForm = () => {
               Register
             </Link>
           </div>
+          
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {isRegister && (
               <div className="mb-2">
@@ -387,7 +388,7 @@ const AuthForm = () => {
                 <Link to="/forgot-password" className="text-gray-400 text-sm hover:underline hover:text-red-500 transition-colors">Forgot password?</Link>
               </div>
             )}
-            {error && (
+           {error && (
               <div className="absolute bottom-2 right-2 bg-white border border-red-300 text-red-500 px-4 py-2 rounded shadow-md text-sm">
                 ERROR for demo: <br />{error}
               </div>
