@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import DashboardTabs from "./DashboardTabs";
+
+const tabs = [
+  "Dashboard",
+  "My Listings",
+  "Promotions",
+  "Bookmarks",
+  "Account details",
+  "Logout"
+];
 
 const AccountDetails = () => {
   const [user, setUser] = useState(null);
@@ -16,6 +26,7 @@ const AccountDetails = () => {
     confirm: false
   });
   const navigate = useNavigate();
+  const [activeTab] = useState("Account details");
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -60,6 +71,24 @@ const AccountDetails = () => {
     alert("Account type changed to Property owner!");
   };
 
+  // Pour le menu, on désactive les autres onglets
+  const handleTabChange = (tab) => {
+    if (tab === "Account details") return;
+    // Map tab names to URL param values
+    const tabToParam = {
+      "Dashboard": "dashboard",
+      "My Listings": "mylistings",
+      "Promotions": "promotions",
+      "Bookmarks": "bookmarks",
+      "Account details": "account",
+    };
+    if (tab === "Dashboard") {
+      navigate("/dashboard");
+    } else if (tabToParam[tab]) {
+      navigate(`/dashboard?tab=${tabToParam[tab]}`);
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -80,19 +109,8 @@ const AccountDetails = () => {
     <div className="min-h-screen bg-gray-100">
       {/* Header avec navigation */}
       <div className="bg-white border-b border-gray-200">
-        <div className="flex flex-wrap justify-center items-center">
-          {["Dashboard", "My Listings", "Promotions", "Bookmarks", "Account details", "Logout"].map((tab, i) => (
-            <button
-              key={tab}
-              className={`font-bold text-sm md:text-base px-4 md:px-8 py-3 md:py-4 border-b-2 transition-colors duration-150 
-                ${tab === "Account details" ? "border-red-500 text-gray-900" : "border-transparent text-gray-700 hover:text-red-500"} flex-1 min-w-[100px] max-w-[150px]`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <DashboardTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
-
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Account Details Card */}
