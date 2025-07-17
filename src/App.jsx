@@ -16,6 +16,9 @@ import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard';
 import ExplorePage from './components/ExplorePage';
 import { AuthProvider } from './components/AuthContext';
+import RentSale from './components/RentSale';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 
 function App() {
@@ -39,7 +42,8 @@ function App() {
               
             } />
             <Route path="/ListingPage" element={<ListingPage />} />
-            <Route path="/rentlist" element={<RentList />} />
+            <Route path="/rentsale" element={<RentSale />} />
+          <Route path="/rentlist" element={<RentList />} />
             <Route path="/signin" element={<AuthForm />} />
             <Route path="/register" element={<AuthForm />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

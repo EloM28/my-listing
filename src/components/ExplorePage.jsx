@@ -3,6 +3,7 @@ import ExploreHeader from "./ExploreHeader";
 import ExploreSidebar from "./ExploreSidebar";
 import ExplorePagination from "./ExplorePagination";
 import ExploreResults from "./ExploreResults";
+import ExploreMap from "./ExploreMap";
 
 const NAVBAR_HEIGHT = 64; // px (ajuste si besoin)
 const HEADER_HEIGHT = 70; // px (ajuste si besoin)
@@ -11,6 +12,7 @@ const ExplorePage = () => {
   const [scrollHeight, setScrollHeight] = useState("calc(100vh - 134px)");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const headerRef = useRef(null);
+  const [showMap, setShowMap] = useState(false);
   useEffect(() => {
     function handleResize() {
       const headerH = headerRef.current ? headerRef.current.offsetHeight : HEADER_HEIGHT;
@@ -52,9 +54,13 @@ const ExplorePage = () => {
         <div className="flex-1 flex flex-col" style={{height: scrollHeight}}>
           <div className="flex-1 overflow-y-auto flex flex-col">
             <div className="flex items-center justify-between mb-4">
-              <ExplorePagination />
+              <ExplorePagination onMapClick={() => setShowMap(true)} />
             </div>
-            <ExploreResults />
+            {showMap ? (
+              <ExploreMap onClose={() => setShowMap(false)} />
+            ) : (
+              <ExploreResults />
+            )}
           </div>
         </div>
       </div>
