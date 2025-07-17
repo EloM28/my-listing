@@ -113,7 +113,13 @@ const AccountDetails = () => {
               {/* Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <div className="font-bold text-gray-900">{formData.email}</div>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="font-bold text-gray-900 bg-transparent focus:outline-none border-none p-0"
+                />
               </div>
 
               {/* Change Password Section */}
