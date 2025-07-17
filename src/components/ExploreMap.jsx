@@ -2,18 +2,18 @@ import React from "react";
 
 const ExploreMap = ({ onClose }) => {
   return (
-    <div className="relative w-full h-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+    <div className="relative w-full h-[300px] sm:h-[400px] md:h-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
       {/* Barre de recherche */}
-      <div className="absolute top-4 left-4 z-10 flex items-center bg-white rounded-lg shadow px-4 py-2 w-80">
+      <div className="absolute top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-auto z-10 flex items-center bg-white rounded-lg shadow px-2 py-2 sm:px-4 sm:py-2 w-full sm:w-80 max-w-full">
         <svg className="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/></svg>
         <input
           type="text"
           placeholder="Search as I move the map"
-          className="flex-1 bg-transparent outline-none text-gray-700 text-sm"
+          className="flex-1 bg-transparent outline-none text-gray-700 text-sm min-w-0"
         />
       </div>
       {/* Bouton fermer */}
-      <button onClick={onClose} className="absolute top-4 right-4 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-100">
+      <button onClick={onClose} className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white rounded-full shadow p-2 hover:bg-gray-100">
         <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
       {/* Carte (maquette) */}
@@ -25,13 +25,13 @@ const ExploreMap = ({ onClose }) => {
         />
         {/* Marqueurs fictifs */}
         <div className="absolute left-[40%] top-[45%]">
-          <span className="flex items-center justify-center w-12 h-12 bg-rose-500 text-white rounded-full shadow-lg text-xl font-bold">3</span>
+          <span className="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-rose-500 text-white rounded-full shadow-lg text-base sm:text-xl font-bold">3</span>
         </div>
         <div className="absolute left-[55%] top-[35%]">
-          <span className="flex items-center justify-center w-12 h-12 bg-rose-500 text-white rounded-full shadow-lg text-xl font-bold">2</span>
+          <span className="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-rose-500 text-white rounded-full shadow-lg text-base sm:text-xl font-bold">2</span>
         </div>
         <div className="absolute left-[60%] top-[55%]">
-          <span className="flex items-center justify-center w-12 h-12 bg-rose-500 text-white rounded-full shadow-lg text-xl font-bold">1</span>
+          <span className="flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-rose-500 text-white rounded-full shadow-lg text-base sm:text-xl font-bold">1</span>
         </div>
       </div>
       {/* Footer Mapbox/OpenStreetMap (maquette) */}
