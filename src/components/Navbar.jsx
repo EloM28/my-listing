@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { dashboardTabsMenu } from "./dashboardTabsConfig";
+import { useAuth } from "./AuthContext";
 
 const tabToParam = {
   "Dashboard": "/dashboard",
@@ -27,6 +28,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [userDropdown, setUserDropdown] = useState(false);
   const userDropdownRef = useRef();
+  const { logout } = useAuth();
 
   useEffect(() => {
     const stored = localStorage.getItem('user');
@@ -47,7 +49,7 @@ const Navbar = () => {
   }, [userDropdown]);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    logout();
     setUser(null);
     navigate('/');
   };
