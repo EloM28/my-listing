@@ -254,9 +254,12 @@ const Navbar = () => {
           <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
           </a>
+          { user && 
           <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 15a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v8zm-2 0V7m0 8l-7-5-7 5" /></svg>
-          </a>
+          </a> 
+          }
+          
           {user?.role !== "customer" && (
            <>
               <a href="#" className="hidden lg:flex bg-red-500 hover:bg-red-600 text-white font-semibold px-2 md:px-3 lg:px-5 py-1 md:py-2 lg:py-2 rounded items-center gap-2 ml-1 md:ml-2 lg:ml-4 text-xs md:text-sm lg:text-base h-8 md:h-10 lg:h-12">
@@ -285,10 +288,24 @@ const Navbar = () => {
         </div>
         {/* Right: panier, search icon (dropdown), user icon */}
         <div className="flex items-center gap-2">
-          <a href="#" className="text-gray-700 hover:text-red-500">
+        <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
           </a>
-          <a href="#" className="hidden md:inline-block lg:hidden text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm">Sign in or Register</a>
+          {
+            user ? (
+            <a href="#" className="text-gray-700 hover:text-red-500 text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">
+             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 15a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v8zm-2 0V7m0 8l-7-5-7 5" /></svg>
+            </a>
+          ) : (
+            <>
+              <Link to="/signin" className="text-gray-700 hover:text-red-500">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.797.755 6.879 2.047M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </Link>
+              <Link to="/signin"  className="hidden md:inline-block lg:hidden text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm">Sign in</Link> or
+              <Link to="/register"  className="hidden md:inline-block lg:hidden text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm">Register</Link>
+            </>
+          )
+          }
           {/* Search icon with dropdown */}
           <div className="relative">
             <button
@@ -310,9 +327,6 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <Link to="/signin" className="text-gray-700 hover:text-red-500">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.797.755 6.879 2.047M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          </Link>
         </div>
       </div>
       {/* Drawer et recherche mobile (inchangés) */}
