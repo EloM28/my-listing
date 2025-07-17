@@ -242,7 +242,8 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/signin" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Sign in</Link> or 
+              <Link to="/signin" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Sign in</Link> 
+              <span>or</span> 
               <Link to="/register" className="text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm lg:text-base px-1 md:px-2 lg:px-3 py-1 md:py-2 lg:py-2">Register</Link>
             </>
           )}
@@ -296,7 +297,8 @@ const Navbar = () => {
               <Link to="/signin" className="text-gray-700 hover:text-red-500">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.797.755 6.879 2.047M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
               </Link>
-              <Link to="/signin"  className="hidden md:inline-block lg:hidden text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm">Sign in</Link> or
+              <Link to="/signin"  className="hidden md:inline-block lg:hidden text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm">Sign in</Link>
+              <span className="hidden md:inline-block lg:hidden">or</span>
               <Link to="/register"  className="hidden md:inline-block lg:hidden text-gray-700 hover:text-red-500 font-medium text-xs md:text-sm">Register</Link>
             </>
           )
