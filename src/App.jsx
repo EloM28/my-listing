@@ -42,7 +42,7 @@ function App() {
               
             } />
             <Route path="/ListingPage" element={<ListingPage />} />
-            <Route path="/rentsale" element={<RentSale />} />
+            <Route path="/salelist" element={<RentSale />} />
           <Route path="/rentlist" element={<RentList />} />
             <Route path="/signin" element={<AuthForm />} />
             <Route path="/register" element={<AuthForm />} />
