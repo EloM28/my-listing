@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import AccountDetails from "./AccountDetails";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 const tabs = [
   "Dashboard",
@@ -11,18 +11,53 @@ const tabs = [
   "Logout"
 ];
 
+// Map tab names to URL param values
+const tabToParam = {
+  "Dashboard": "dashboard",
+  "My Listings": "mylistings",
+  "Promotions": "promotions",
+  "Bookmarks": "bookmarks",
+  "Account details": "account",
+};
+const paramToTab = {
+  "dashboard": "Dashboard",
+  "mylistings": "My Listings",
+  "promotions": "Promotions",
+  "bookmarks": "Bookmarks",
+  "account": "Account details",
+};
+
 const Dashboard = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Dashboard");
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const [searchParams] = useSearchParams();
-
-  // Vérifier si le paramètre tab=account est présent dans l'URL
+  
+  // Synchronise l'onglet actif avec l'URL
   useEffect(() => {
     const tabParam = searchParams.get('tab');
-    if (tabParam === 'account') {
-      setActiveTab("Account details");
+    if (tabParam && paramToTab[tabParam] && paramToTab[tabParam] !== activeTab) {
+      setActiveTab(paramToTab[tabParam]);
+      console.log('first co=lg', paramToTab[tabParam])
+
+    }
+    if (!tabParam && activeTab !== "Dashboard") {
+      setActiveTab("Dashboard");
     }
   }, [searchParams]);
+
+  // Synchronise l'URL avec l'onglet actif
+  useEffect(() => {
+    const currentParam = searchParams.get('tab');
+    const expectedParam = tabToParam[activeTab];
+    if (expectedParam && currentParam !== expectedParam) {
+      setSearchParams({ tab: expectedParam });
+    }
+    if (activeTab === "Dashboard" && searchParams.get('tab')) {
+      setSearchParams({});
+
+    }
+  }, [activeTab]);
 
   // Si l'onglet "Account details" est sélectionné, afficher le composant AccountDetails
   if (activeTab === "Account details") {
