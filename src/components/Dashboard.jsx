@@ -1,16 +1,9 @@
 import React, {useState, useEffect} from "react";
 import AccountDetails from "./AccountDetails";
 import DashboardTabs from "./DashboardTabs";
+import { dashboardTabsMenu } from "./dashboardTabsConfig";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
-const tabs = [
-  "Dashboard",
-  "My Listings",
-  "Promotions",
-  "Bookmarks",
-  "Account details",
-  "Logout"
-];
 
 // Map tab names to URL param values
 const tabToParam = {
@@ -75,7 +68,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-white border-b border-gray-200">
-        <DashboardTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
+        <DashboardTabs tabs={dashboardTabsMenu} activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
       <div className="max-w-6xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Hello, {user.name?.toLowerCase() || ''}!</h1>
