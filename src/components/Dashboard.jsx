@@ -3,6 +3,9 @@ import AccountDetails from "./AccountDetails";
 import DashboardTabs from "./DashboardTabs";
 import { dashboardTabsMenu } from "./dashboardTabsConfig";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import Bookmarks from "./Bookmarks";
+import MyListings from "./MyListings";
+import Promotions from "./Promotions";
 
 
 // Map tab names to URL param values
@@ -61,9 +64,10 @@ const Dashboard = () => {
   };
 
   // Si l'onglet "Account details" est sélectionné, afficher le composant AccountDetails
-  if (activeTab === "Account details") {
-    return <AccountDetails />;
-  }
+  if (activeTab === "Account details") return <AccountDetails />;
+  if (activeTab === "My Listings") return <MyListings />;
+  if (activeTab === "Promotions") return <Promotions />;
+  if (activeTab === "Bookmarks") return <Bookmarks />;
 
   return (
     <div className="min-h-screen bg-gray-100">
