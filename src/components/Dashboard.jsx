@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import AccountDetails from "./AccountDetails";
+import DashboardTabs from "./DashboardTabs";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
 const tabs = [
@@ -32,14 +33,12 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Dashboard");
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  
+
   // Synchronise l'onglet actif avec l'URL
   useEffect(() => {
     const tabParam = searchParams.get('tab');
     if (tabParam && paramToTab[tabParam] && paramToTab[tabParam] !== activeTab) {
       setActiveTab(paramToTab[tabParam]);
-      console.log('first co=lg', paramToTab[tabParam])
-
     }
     if (!tabParam && activeTab !== "Dashboard") {
       setActiveTab("Dashboard");
@@ -55,9 +54,18 @@ const Dashboard = () => {
     }
     if (activeTab === "Dashboard" && searchParams.get('tab')) {
       setSearchParams({});
-
     }
   }, [activeTab]);
+
+  // Gestion du changement d'onglet
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === "Dashboard") {
+      setSearchParams({});
+    } else if (tabToParam[tab]) {
+      setSearchParams({ tab: tabToParam[tab] });
+    }
+  };
 
   // Si l'onglet "Account details" est sélectionné, afficher le composant AccountDetails
   if (activeTab === "Account details") {
@@ -67,18 +75,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-white border-b border-gray-200">
-        <div className="flex flex-wrap justify-center items-center" >
-        {tabs.map((tab, i) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`font-bold text-sm md:text-base px-4 md:px-8 py-3 md:py-4 border-b-2 transition-colors duration-150 
-              ${ activeTab === tab ? "border-red-500 text-gray-900" : "border-transparent text-gray-700 hover:text-red-500"} flex-1 min-w-[100px] max-w-[150px]`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+        <DashboardTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
       <div className="max-w-6xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Hello, {user.name?.toLowerCase() || ''}!</h1>
