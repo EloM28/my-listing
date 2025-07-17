@@ -6,7 +6,7 @@ const userMenu = [
   { label: "My Listings", to: "#" },
   { label: "Promotions", to: "#" },
   { label: "Bookmarks", to: "#" },
-  { label: "Account Details", to: "#" },
+  { label: "Account Details", to: "/dashboard?tab=account" },
   { label: "Logout", to: "#logout", danger: true },
 ];
 
