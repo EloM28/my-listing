@@ -38,7 +38,7 @@ const Dashboard = () => {
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`font-bold text-sm md:text-base px-4 md:px-8 py-3 md:py-4 border-b-2 transition-colors duration-150 
-              ${ activeTab === tab ? "border-red-500 text-gray-900" : "border-transparent text-gray-700 hover:text-red-500"} ${i > 0 ? 'border-l border-gray-200' : ''} flex-1 min-w-[100px] max-w-[150px]`}
+              ${ activeTab === tab ? "border-red-500 text-gray-900" : "border-transparent text-gray-700 hover:text-red-500"} flex-1 min-w-[100px] max-w-[150px]`}
           >
             {tab}
           </button>
