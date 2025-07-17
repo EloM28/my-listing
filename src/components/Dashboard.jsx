@@ -14,17 +14,16 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-white border-b border-gray-200">
-        <div className="flex justify-center items-center gap-0">
-          {tabs.map((tab, i) => (
-            <button
-              key={tab}
-              className={`font-bold text-base px-8 py-4 border-b-2 transition-colors duration-150 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700 hover:text-red-500'} ${i > 0 ? 'border-l border-gray-200' : ''}`}
-              style={{minWidth:140}}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <div className="flex flex-wrap justify-center items-center">
+        {tabs.map((tab, i) => (
+          <button
+            key={tab}
+            className={`font-bold text-sm md:text-base px-4 md:px-8 py-3 md:py-4 border-b-2 transition-colors duration-150 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700 hover:text-red-500'} ${i > 0 ? 'border-l border-gray-200' : ''} flex-1 min-w-[100px] max-w-[150px]`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
       </div>
       <div className="max-w-6xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Hello, {user.name?.toLowerCase() || ''}!</h1>
