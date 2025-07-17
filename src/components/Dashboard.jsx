@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import AccountDetails from "./AccountDetails";
+import { useSearchParams } from "react-router-dom";
 
 const tabs = [
   "Dashboard",
@@ -12,20 +14,24 @@ const tabs = [
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("Dashboard");
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const [searchParams] = useSearchParams();
+
+  // Vérifier si le paramètre tab=account est présent dans l'URL
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam === 'account') {
+      setActiveTab("Account details");
+    }
+  }, [searchParams]);
+
+  // Si l'onglet "Account details" est sélectionné, afficher le composant AccountDetails
+  if (activeTab === "Account details") {
+    return <AccountDetails />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="bg-white border-b border-gray-200">
-        {/* <div className="flex justify-center items-center gap-0">
-          {tabs.map((tab, i) => (
-            <button
-              key={tab}
-              className={`font-bold text-base px-8 py-4 border-b-2 transition-colors duration-150 ${i === 0 ? 'border-red-500 text-gray-900' : 'border-transparent text-gray-700 hover:text-red-500'} ${i > 0 ? 'border-l border-gray-200' : ''}`}
-              style={{minWidth:140}}
-            >
-              {tab}
-            </button>
-          ))}
-        </div> */}
         <div className="flex flex-wrap justify-center items-center" >
         {tabs.map((tab, i) => (
           <button
