@@ -24,6 +24,7 @@ ChartJS.register(
 const OwnerDashboard = ({ user }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("7d");
   const [isTopReferrersOpen, setIsTopReferrersOpen] = useState(false);
+  const [selectedListingFilter, setSelectedListingFilter] = useState("All Listings");
 
   // Pour l'instant, données statiques (tout à 0)
   const stats = [
@@ -118,7 +119,21 @@ const OwnerDashboard = ({ user }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-8">Hello, {user?.name || "!"}</h1>
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-4 lg:mb-0">Hello, {user?.name || "!"}</h1>
+          <div className="flex items-center gap-4">
+            <select
+              value={selectedListingFilter}
+              onChange={(e) => setSelectedListingFilter(e.target.value)}
+              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300 bg-white"
+            >
+              <option value="All Listings">Filter by listing</option>
+              <option value="Published">Published</option>
+              <option value="Pending">Pending</option>
+              <option value="Expired">Expired</option>
+            </select>
+          </div>
+        </div>
         {/* Statistiques principales */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {stats.map((stat, idx) => (
