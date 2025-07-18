@@ -9,6 +9,9 @@ const sections = [
   { id: "pricing", label: "Pricing" },
 ];
 
+const inputClass =
+  "block w-full bg-transparent border-0 border-b border-b-2 border-gray-200 focus:border-b-red-500 focus:border-t-0 focus:border-l-0 focus:border-r-0 focus:ring-0 text-base py-2 transition placeholder-gray-400 outline-none shadow-none";
+
 const ListingForm = () => {
   const [activeSection, setActiveSection] = useState("general");
   const sectionRefs = useRef({});
@@ -87,9 +90,9 @@ const ListingForm = () => {
               <div className="flex flex-col gap-4">
                 {s.id === "general" && (
                   <>
-                    <label className="font-semibold">Title<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Tagline<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Description<textarea className="block w-full border rounded p-2 mt-1" rows={4} /></label>
+                    <label className="font-semibold">Title<input className={inputClass} type="text" placeholder="Title" /></label>
+                    <label className="font-semibold">Tagline<input className={inputClass} type="text" placeholder="Tagline" /></label>
+                    <label className="font-semibold">Description<textarea className={inputClass + " resize-none min-h-[80px]"} placeholder="Description" /></label>
                   </>
                 )}
                 {s.id === "images" && (
@@ -100,46 +103,48 @@ const ListingForm = () => {
                 )}
                 {s.id === "contact" && (
                   <>
-                    <label className="font-semibold">Contact Email<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Phone Number (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
+                    <label className="font-semibold">Contact Email<input className={inputClass} type="email" placeholder="Email" /></label>
+                    <label className="font-semibold">Phone Number (optional)<input className={inputClass} type="text" placeholder="Phone number" /></label>
                   </>
                 )}
                 {s.id === "rent" && (
                   <>
                     <label className="font-semibold">Category<div className="flex gap-4 mt-1"><label><input type="checkbox" /> Apartment</label><label><input type="checkbox" /> House</label><label><input type="checkbox" /> Office</label><label><input type="checkbox" /> Room</label></div></label>
-                    <label className="font-semibold">Amenities (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Area (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Rooms (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Beds (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Bathrooms (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
+                    <label className="font-semibold">Amenities (optional)<input className={inputClass} type="text" placeholder="Amenities" /></label>
+                    <label className="font-semibold">Area (optional)<input className={inputClass} type="number" placeholder="Area" /></label>
+                    <label className="font-semibold">Rooms (optional)<input className={inputClass} type="number" placeholder="Rooms" /></label>
+                    <label className="font-semibold">Beds (optional)<input className={inputClass} type="number" placeholder="Beds" /></label>
+                    <label className="font-semibold">Bathrooms (optional)<input className={inputClass} type="number" placeholder="Bathrooms" /></label>
                   </>
                 )}
                 {s.id === "location" && (
                   <>
-                    <label className="font-semibold">Region (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
-                    <label className="font-semibold">Location<input className="block w-full border rounded p-2 mt-1" /></label>
+                    <label className="font-semibold">Region (optional)<input className={inputClass} type="text" placeholder="Region" /></label>
+                    <label className="font-semibold">Location<input className={inputClass} type="text" placeholder="Location" /></label>
                     <div className="mt-2">Map placeholder</div>
                   </>
                 )}
                 {s.id === "pricing" && (
                   <>
-                    <label className="font-semibold">Sale price (optional)<input className="block w-full border rounded p-2 mt-1" /></label>
+                    <label className="font-semibold">Sale price (optional)<input className={inputClass} type="number" placeholder="0" /></label>
                   </>
                 )}
               </div>
             </section>
           ))}
           {/* Boutons dynamiques */}
-          <div className="flex flex-col md:flex-row gap-4 mt-8">
-            <button type="submit" className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
+          <div className="flex flex-col gap-4 mt-8">
+            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
               <span>Submit listing</span>
             </button>
-            <button type="button" onClick={handlePreview} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
-              <span>Preview</span>
-            </button>
-            <button type="button" onClick={handleDraft} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
-              <span>Save as draft</span>
-            </button>
+            <div className="flex flex-col md:flex-row gap-4 w-full">
+              <button type="button" onClick={handlePreview} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
+                <span>Preview</span>
+              </button>
+              <button type="button" onClick={handleDraft} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
+                <span>Save as draft</span>
+              </button>
+            </div>
           </div>
         </form>
       </div>
