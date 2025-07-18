@@ -17,8 +17,9 @@ import Dashboard from './components/Dashboard';
 import ExplorePage from './components/ExplorePage';
 import { AuthProvider } from './components/AuthContext';
 import RentSale from './components/RentSale';
+import AddListing from './components/AddListing';
+import ChoosePackage from './components/ChoosePackage';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
 
 
 function App() {
@@ -49,6 +50,8 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/add-listing" element={<AddListing />} />
+            <Route path="/choose-package" element={<ChoosePackage />} />
           </Routes>
           <FooterSection />
         </div>
