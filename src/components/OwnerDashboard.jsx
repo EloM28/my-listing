@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ListingStatusDropdown from "./ListingStatusDropdown";
 
 ChartJS.register(
   CategoryScale,
@@ -20,6 +21,14 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const statusOptions = [
+  { label: "All Listings", value: "All Listings" },
+  { label: "Published", value: "Published" },
+  { label: "Pending Approval", value: "Pending Approval" },
+  { label: "Pending Payment", value: "Pending Payment" },
+  { label: "Expired", value: "Expired" },
+];
 
 const OwnerDashboard = ({ user }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("7d");
@@ -122,16 +131,11 @@ const OwnerDashboard = ({ user }) => {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4 lg:mb-0">Hello, {user?.name || "!"}</h1>
           <div className="flex items-center gap-4">
-            <select
+            <ListingStatusDropdown
               value={selectedListingFilter}
-              onChange={(e) => setSelectedListingFilter(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300 bg-white"
-            >
-              <option value="All Listings">Filter by listing</option>
-              <option value="Published">Published</option>
-              <option value="Pending">Pending</option>
-              <option value="Expired">Expired</option>
-            </select>
+              onChange={setSelectedListingFilter}
+              options={statusOptions}
+            />
           </div>
         </div>
         {/* Statistiques principales */}

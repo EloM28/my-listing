@@ -1,4 +1,13 @@
 import React, { useState } from "react";
+import ListingStatusDropdown from "./ListingStatusDropdown";
+
+const statusOptions = [
+  { label: "All Listings", value: "All Listings" },
+  { label: "Published", value: "Published" },
+  { label: "Pending Approval", value: "Pending Approval" },
+  { label: "Pending Payment", value: "Pending Payment" },
+  { label: "Expired", value: "Expired" },
+];
 
 const OwnerListings = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -66,17 +75,12 @@ const OwnerListings = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            {/* Dropdown de filtres */}
-            <select
+            {/* Dropdown de filtres custom */}
+            <ListingStatusDropdown
               value={selectedFilter}
-              onChange={(e) => setSelectedFilter(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300"
-            >
-              <option value="All Listings">All Listings</option>
-              <option value="Published">Published</option>
-              <option value="Pending">Pending</option>
-              <option value="Expired">Expired</option>
-            </select>
+              onChange={setSelectedFilter}
+              options={statusOptions}
+            />
           </div>
         </div>
 
