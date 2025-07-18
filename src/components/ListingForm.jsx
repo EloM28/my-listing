@@ -131,7 +131,7 @@ const ListingForm = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-2">
       <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8 text-center">Your listing details</h1>
-      <div className="flex w-full max-w-3xl gap-4"> {/* Réduit la largeur max */}
+      <div className="flex w-full max-w-4xl mx-auto gap-12 justify-start"> {/* Conteneur centré, largeur réduite */}
         {/* Navigation gauche */}
         <nav ref={navRef} className="hidden md:flex flex-col gap-2 w-40 pt-4 sticky top-24 h-fit">
           {sections.map(s => (
@@ -145,7 +145,7 @@ const ListingForm = () => {
           ))}
         </nav>
         {/* Formulaire principal */}
-        <form className="flex-1 flex flex-col gap-6" onSubmit={handleSubmit}> {/* gap réduit */}
+        <form className="flex-1 flex flex-col gap-6 max-w-xl" onSubmit={handleSubmit}> {/* Formulaire compact */}
           {sections.map(s => (
             <section
               key={s.id}
