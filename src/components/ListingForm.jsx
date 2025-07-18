@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const sections = [
   { id: "general", label: "General" },
@@ -12,18 +12,23 @@ const sections = [
 const ListingForm = () => {
   const [activeSection, setActiveSection] = useState("general");
   const sectionRefs = useRef({});
+  const navRef = useRef();
   const [form, setForm] = useState({});
   const [status, setStatus] = useState("");
 
   // Scrollspy: détecte la section visible
-  const handleScroll = () => {
-    const offsets = sections.map(s => {
-      const el = sectionRefs.current[s.id];
-      return el ? Math.abs(el.getBoundingClientRect().top - 120) : Infinity;
-    });
-    const minIdx = offsets.indexOf(Math.min(...offsets));
-    setActiveSection(sections[minIdx].id);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const offsets = sections.map(s => {
+        const el = sectionRefs.current[s.id];
+        return el ? Math.abs(el.getBoundingClientRect().top - 120) : Infinity;
+      });
+      const minIdx = offsets.indexOf(Math.min(...offsets));
+      setActiveSection(sections[minIdx].id);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Scroll vers une section
   const scrollToSection = (id) => {
@@ -51,11 +56,11 @@ const ListingForm = () => {
       <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-8 text-center">Your listing details</h1>
       <div className="flex w-full max-w-6xl gap-8">
         {/* Navigation gauche */}
-        <nav className="hidden md:flex flex-col gap-2 w-48 pt-4 sticky top-24 h-fit">
+        <nav ref={navRef} className="hidden md:flex flex-col gap-2 w-48 pt-4 sticky top-24 h-fit">
           {sections.map(s => (
             <button
               key={s.id}
-              className={`text-left px-4 py-2 rounded transition font-semibold ${activeSection === s.id ? "bg-red-100 text-red-600" : "text-gray-700 hover:bg-gray-50"}`}
+              className={`text-left px-4 py-2 rounded transition font-semibold ${activeSection === s.id ? "bg-red-100 text-red-600 shadow" : "text-gray-700 hover:bg-gray-50"}`}
               onClick={() => scrollToSection(s.id)}
             >
               {s.label}
@@ -63,7 +68,7 @@ const ListingForm = () => {
           ))}
         </nav>
         {/* Formulaire principal */}
-        <form className="flex-1 flex flex-col gap-8" onScroll={handleScroll} onSubmit={handleSubmit}>
+        <form className="flex-1 flex flex-col gap-8" onSubmit={handleSubmit}>
           {sections.map(s => (
             <section
               key={s.id}
