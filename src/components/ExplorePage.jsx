@@ -12,7 +12,7 @@ const ExplorePage = () => {
   const [scrollHeight, setScrollHeight] = useState("calc(100vh - 134px)");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const headerRef = useRef(null);
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(true); // true par défaut
   const [activeTab, setActiveTab] = useState("rent");
   useEffect(() => {
     function handleResize() {
@@ -23,6 +23,9 @@ const ExplorePage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Fonction toggle pour le bouton de ExplorePagination
+  const handleToggleMap = () => setShowMap((prev) => !prev);
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
@@ -55,10 +58,10 @@ const ExplorePage = () => {
         <div className="flex-1 flex flex-col" style={{height: scrollHeight}}>
           <div className="flex-1 overflow-y-auto flex flex-col">
             <div className="flex items-center justify-between mb-4">
-              <ExplorePagination onMapClick={() => setShowMap(true)} />
+              <ExplorePagination onMapClick={handleToggleMap} showMap={showMap} />
             </div>
             {showMap ? (
-              <ExploreMap onClose={() => setShowMap(false)} />
+              <ExploreMap onClose={handleToggleMap} />
             ) : (
               <ExploreResults activeTab={activeTab} />
             )}
