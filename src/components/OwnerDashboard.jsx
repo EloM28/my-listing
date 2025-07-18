@@ -129,6 +129,35 @@ const OwnerDashboard = ({ user }) => {
             </div>
           ))}
         </div>
+        {/* Visits (chart) - apparaît après les stats sur mobile */}
+        <div className="lg:hidden mb-8">
+          <div className="bg-white rounded-lg shadow border border-gray-200 p-4 w-full">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M8 12h8" strokeWidth="2" /></svg>
+              </span>
+              <span className="font-bold text-sm">Visits</span>
+              <div className="ml-auto flex gap-1">
+                {periods.map(p => (
+                  <button
+                    key={p.value}
+                    className={`px-2 py-0.5 rounded-full text-xs border ${selectedPeriod === p.value ? "bg-red-500 text-white" : "bg-white text-gray-700"}`}
+                    onClick={() => setSelectedPeriod(p.value)}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="w-full h-48">
+              <Line data={chartData} options={{...chartOptions, maintainAspectRatio: false, responsive: true}} width={null} height={null} style={{ width: '100%' }} />
+            </div>
+            <div className="flex justify-center gap-4 mt-2 text-xs">
+              <span className="flex items-center gap-1 text-red-500 font-bold"><span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>Views</span>
+              <span className="flex items-center gap-1 text-blue-500 font-bold"><span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>Unique views</span>
+            </div>
+          </div>
+        </div>
         {/* Layout principal : 2 colonnes en desktop, tout en colonne sur mobile */}
         <div className="flex flex-col lg:flex-row gap-8 mb-8">
           {/* Colonne de gauche */}
@@ -202,7 +231,7 @@ const OwnerDashboard = ({ user }) => {
           {/* Colonne de droite */}
           <div className="flex-1 flex flex-col gap-4 w-full lg:w-auto">
             {/* Visits (chart) */}
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-4 w-full">
+            <div className="hidden lg:block bg-white rounded-lg shadow border border-gray-200 p-4 w-full">
               <div className="flex items-center gap-2 mb-2">
                 <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M8 12h8" strokeWidth="2" /></svg>
