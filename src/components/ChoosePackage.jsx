@@ -52,13 +52,13 @@ const ChoosePackage = () => {
       <div className="flex flex-col md:flex-row gap-6 w-full max-w-md md:max-w-5xl justify-center items-center">
         {packages.map(pkg => (
           <div key={pkg.name} className="w-full md:w-1/3 bg-white rounded-lg shadow-lg p-8 flex flex-col items-center border border-gray-200 mb-4 md:mb-0">
-            <h2 className="text-lg font-bold text-red-500 mb-2 tracking-widest text-center">{pkg.name}</h2>
-            <div className="text-4xl font-extrabold text-red-500 mb-4 text-center">{pkg.price}</div>
+            <h2 className="text-lg font-bold text-black mb-2 tracking-widest text-center">{pkg.name}</h2>
+            <div className="text-4xl font-extrabold text-black mb-4 text-center">{pkg.price}</div>
             <ul className="mb-8 text-gray-700 text-base list-disc list-inside text-center">
               {pkg.features.map(f => <li key={f}>{f}</li>)}
             </ul>
             <button
-              className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2"
+              className="w-full bg-gray-900 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2"
               onClick={() => handleBuy(pkg)}
             >
               Buy Package
