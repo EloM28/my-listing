@@ -19,6 +19,7 @@ import { AuthProvider } from './components/AuthContext';
 import RentSale from './components/RentSale';
 import AddListing from './components/AddListing';
 import ChoosePackage from './components/ChoosePackage';
+import ListingForm from './components/ListingForm';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
@@ -52,6 +53,7 @@ function App() {
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/add-listing" element={<AddListing />} />
             <Route path="/choose-package" element={<ChoosePackage />} />
+            <Route path="/listing-form" element={<ListingForm />} />
           </Routes>
           <FooterSection />
         </div>
