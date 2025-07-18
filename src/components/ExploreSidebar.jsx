@@ -46,8 +46,8 @@ const categories = [
 const ExploreSidebar = () => {
   const [tab, setTab] = useState("filters");
   return (
-    <aside className="bg-white rounded-2xl shadow p-4 flex flex-col gap-4 min-h-[400px] h-full overflow-y-auto max-h-[calc(100vh-120px)]">
-      <div className="flex gap-6 border-b pb-2 mb-4">
+    <aside className="bg-white rounded-0xl shadow p-4 flex flex-col gap-4 min-h-[400px] h-full overflow-y-auto max-h-[calc(100vh-120px)]">
+      <div className="flex gap-6 pb-2 mb-4">
         <button onClick={() => setTab("filters")} className={`font-bold ${tab === "filters" ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-gray-700"}`}>Filters</button>
         <button onClick={() => setTab("categories")} className={`font-bold ${tab === "categories" ? "text-rose-500 border-b-2 border-rose-500 pb-1" : "text-gray-700"}`}>Categories</button>
       </div>
@@ -94,7 +94,7 @@ const ExploreSidebar = () => {
       {tab === "categories" && (
         <div className="flex flex-col gap-4">
           {categories.map((cat, idx) => (
-            <div key={cat.name + idx} className="relative rounded-2xl overflow-hidden shadow group cursor-pointer min-h-[110px]" style={{ minHeight: 110 }}>
+            <div key={cat.name + idx} className="relative rounded-lg overflow-hidden shadow group cursor-pointer min-h-[130px]" style={{ minHeight: 130 }}>
               <img src={cat.image} alt={cat.name} className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 group-hover:opacity-90 transition-transform duration-200" />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition" />
               <div className="relative flex flex-col justify-end h-full z-10 p-4">
