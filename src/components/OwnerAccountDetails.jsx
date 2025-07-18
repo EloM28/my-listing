@@ -4,6 +4,7 @@ import { useAuth } from "./AuthContext";
 
 const OwnerAccountDetails = () => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,6 +14,14 @@ const OwnerAccountDetails = () => {
     confirmPassword: "",
     facebookUrl: "http://facebook.com"
   });
+  const [socialLinks, setSocialLinks] = useState([
+    { network: "facebook", url: formData.facebookUrl }
+  ]);
+  const [showAddSocial, setShowAddSocial] = useState(false);
+  const [selectedNetwork, setSelectedNetwork] = useState("");
+  const [socialUrl, setSocialUrl] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = React.useRef();
   const [profilePic, setProfilePic] = useState(null); // Ajouté
   const [showPasswords, setShowPasswords] = useState({
     current: false,
@@ -22,6 +31,20 @@ const OwnerAccountDetails = () => {
   const [isFacebookExpanded, setIsFacebookExpanded] = useState(false);
   const navigate = useNavigate();
   const { user: authUser } = useAuth();
+  const SOCIAL_OPTIONS = [
+    { label: "Facebook", value: "facebook" },
+    { label: "X", value: "x" },
+    { label: "Instagram", value: "instagram" },
+    { label: "YouTube", value: "youtube" },
+    { label: "Snapchat", value: "snapchat" },
+    { label: "Tumblr", value: "tumblr" },
+    { label: "Linkedin", value: "linkedin" },
+    { label: "Reddit", value: "reddit" },
+    { label: "Pinterest", value: "pinterest" },
+    { label: "DeviantArt", value: "devianart" },
+    { label: "Vkontakte", value: "vkontakte" },
+    { label: "SoundCloud", value: "soundcloud" },
+  ];
 
   useEffect(() => {
     if (!authUser) navigate('/signin');
@@ -36,10 +59,9 @@ const OwnerAccountDetails = () => {
         confirmPassword: "",
         facebookUrl: "http://facebook.com"
       });
+      setIsLoading(false);
     }
   }, [authUser, navigate]);
-
-  if (!user) return null;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,6 +92,32 @@ const OwnerAccountDetails = () => {
       alert("File size must be less than 1 MB");
     }
   };
+
+
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    if (dropdownOpen) document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [dropdownOpen]);
+
+  const handleAddSocial = () => {
+    if (selectedNetwork && socialUrl.trim()) {
+      setSocialLinks([...socialLinks, { network: selectedNetwork, url: socialUrl.trim() }]);
+      setSelectedNetwork("");
+      setSocialUrl("");
+      setShowAddSocial(false);
+    }
+  };
+  const handleRemoveSocial = (idx) => {
+    setSocialLinks(socialLinks.filter((_, i) => i !== idx));
+  };
+
+  // if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -136,43 +184,82 @@ const OwnerAccountDetails = () => {
           {/* Social Networks Section */}
           <div className="mb-4">
             <label className="block text-sm text-gray-700 mb-1">Social Networks</label>
-            <div className="space-y-2">
-              <div className="border border-gray-200 rounded-lg p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium text-sm">Facebook</span>
-                    <button
-                      onClick={() => setIsFacebookExpanded(!isFacebookExpanded)}
-                      className="text-gray-500 hover:text-gray-700"
-                    >
-                      <svg className={`w-4 h-4 transition-transform duration-200 ${isFacebookExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  </div>
-                  <button className="text-gray-400 hover:text-red-500">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
+            {/* Liste des réseaux déjà ajoutés */}
+            {socialLinks.length > 0 && (
+              <ul className="flex flex-col gap-1 mb-2">
+                {socialLinks.map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-sm">
+                    <span className="font-semibold">{SOCIAL_OPTIONS.find(opt => opt.value === item.network)?.label || item.network}:</span>
+                    <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline break-all flex-1">{item.url}</a>
+                    <button type="button" onClick={() => handleRemoveSocial(idx)} className="text-red-500 text-xs">Remove</button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {/* Affichage du bouton Add ou du formulaire d'ajout */}
+            {!showAddSocial ? (
+              <button
+                type="button"
+                onClick={() => setShowAddSocial(true)}
+                className="w-full bg-gray-100 text-gray-700 py-3 rounded text-base font-medium mb-2"
+              >
+                Add
+              </button>
+            ) : (
+              <div className="flex flex-col gap-2 mb-2">
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    type="button"
+                    className="w-full border-b border-gray-300 py-2 outline-none bg-transparent appearance-none pr-8 flex items-center justify-between"
+                    onClick={() => setDropdownOpen(o => !o)}
+                  >
+                    {selectedNetwork ? (SOCIAL_OPTIONS.find(opt => opt.value === selectedNetwork)?.label) : "Select Network"}
+                    <span className="ml-2">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                    </span>
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute left-0 right-0 bg-white border border-gray-200 rounded shadow-lg z-10 mt-1 max-h-52 overflow-y-auto" style={{maxHeight:'200px'}}>
+                      {SOCIAL_OPTIONS.map(opt => (
+                        <button
+                          type="button"
+                          key={opt.value}
+                          className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${selectedNetwork === opt.value ? 'font-bold bg-gray-50' : ''}`}
+                          onClick={() => { setSelectedNetwork(opt.value); setDropdownOpen(false); }}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="relative flex items-center">
+                  <input
+                    type="url"
+                    value={socialUrl}
+                    onChange={e => setSocialUrl(e.target.value)}
+                    className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
+                    placeholder="Enter URL..."
+                  />
+                  <button
+                    type="button"
+                    onClick={() => { setShowAddSocial(false); setSelectedNetwork(""); setSocialUrl(""); }}
+                    className="absolute left-1/2 -translate-x-1/2 bg-gray-100 rounded-full p-1 mt-9"
+                    title="Cancel"
+                  >
+                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                   </button>
                 </div>
-                {isFacebookExpanded && (
-                  <div className="space-y-2">
-                    <input
-                      type="url"
-                      name="facebookUrl"
-                      value={formData.facebookUrl}
-                      onChange={handleInputChange}
-                      className="w-full border-b border-gray-300 py-2 outline-none bg-transparent"
-                      placeholder="Enter URL..."
-                    />
-                    <button className="w-full bg-gray-100 text-gray-700 py-3 rounded text-base font-medium">
-                      Add
-                    </button>
-                  </div>
-                )}
+                <button
+                  type="button"
+                  onClick={handleAddSocial}
+                  className="w-full bg-gray-100 text-gray-700 py-3 mt-2 rounded text-base font-medium"
+                  disabled={!selectedNetwork || !socialUrl.trim()}
+                >
+                  Add
+                </button>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Change Password Section */}
