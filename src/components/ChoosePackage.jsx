@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const packages = [
   {
@@ -39,11 +39,12 @@ const packages = [
 
 const ChoosePackage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
   const type = params.get('type');
 
   const handleBuy = (pkg) => {
-    alert(`You selected the ${pkg.name} package for type: ${type}`);
+    navigate(`/listing-form?type=${type}&package=${pkg.name.toLowerCase()}`);
   };
 
   return (
