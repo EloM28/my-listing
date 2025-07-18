@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 
-const ExploreHeader = () => {
-  const [activeTab, setActiveTab] = useState("rent");
+const ExploreHeader = ({ activeTab: controlledTab, setActiveTab: setControlledTab }) => {
+  const [localTab, setLocalTab] = useState("rent");
+  const activeTab = controlledTab !== undefined ? controlledTab : localTab;
+  const setActiveTab = setControlledTab || setLocalTab;
 
   return (
-    <div className="w-full bg-white py-4 px-4">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-y-4 gap-x-12">
+    <div className="w-full bg-white py-3 px-4 border-b border-[#ddd]">
+      <div className="max-w-7xl mx-auto flex flex-wrap items-end justify-center gap-y-4 gap-x-16">
         {/* Titre principal */}
         <h2 className="font-bold text-base md:text-lg whitespace-nowrap">
           What are you looking for?
         </h2>
 
         {/* Tabs */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-end gap-12">
           {/* Tab Rent */}
           <button
             onClick={() => setActiveTab("rent")}
@@ -42,10 +44,10 @@ const ExploreHeader = () => {
               <span>For rent</span>
             </div>
             {activeTab === "rent" && (
-            <span
+              <span
                 className="absolute left-1/2 -translate-x-1/2 -bottom-0 bg-rose-500 rounded-full transition-all"
                 style={{ width: "150px", height: "2px" }}
-            ></span>
+              ></span>
             )}
           </button>
 
@@ -78,10 +80,10 @@ const ExploreHeader = () => {
               <span>For sale</span>
             </div>
             {activeTab === "sale" && (
-                <span
-                    className="absolute left-1/2 -translate-x-1/2 -bottom-0 bg-rose-500 rounded-full transition-all"
-                    style={{ width: "150px", height: "2px" }}
-                ></span>
+              <span
+                className="absolute left-1/2 -translate-x-1/2 -bottom-0 bg-rose-500 rounded-full transition-all"
+                style={{ width: "150px", height: "2px" }}
+              ></span>
             )}
           </button>
         </div>
