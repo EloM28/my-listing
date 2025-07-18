@@ -258,10 +258,10 @@ const Navbar = () => {
           
           {user?.role !== "customer" && (
            <>
-              <a href="#" className="hidden lg:flex bg-red-500 hover:bg-red-600 text-white font-semibold px-2 md:px-3 lg:px-5 py-1 md:py-2 lg:py-2 rounded items-center gap-2 ml-1 md:ml-2 lg:ml-4 text-xs md:text-sm lg:text-base h-8 md:h-10 lg:h-12">
+              <Link to="/add-listing" className="hidden lg:flex bg-red-500 hover:bg-red-600 text-white font-semibold px-2 md:px-3 lg:px-5 py-1 md:py-2 lg:py-2 rounded items-center gap-2 ml-1 md:ml-2 lg:ml-4 text-xs md:text-sm lg:text-base h-8 md:h-10 lg:h-12">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7h18M3 12h18M3 17h18" /></svg>
                 Add Listing
-              </a>
+              </Link>
             </>
           )
           }
