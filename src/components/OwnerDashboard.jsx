@@ -23,6 +23,7 @@ ChartJS.register(
 
 const OwnerDashboard = ({ user }) => {
   const [selectedPeriod, setSelectedPeriod] = useState("7d");
+  const [isTopReferrersOpen, setIsTopReferrersOpen] = useState(false);
 
   // Pour l'instant, données statiques (tout à 0)
   const stats = [
@@ -231,12 +232,36 @@ const OwnerDashboard = ({ user }) => {
             <div className="flex flex-col gap-4 w-full">
               {/* Top Referrers - toute la largeur */}
               <div className="bg-white rounded-lg shadow border border-gray-200 p-4 w-full">
-                <div className="flex items-center gap-2 mb-6">
-                  <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" strokeWidth="2" /></svg>
-                  </span>
-                  <span className="font-bold text-sm">Top Referrers</span>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-2">
+                    <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" strokeWidth="2" /></svg>
+                    </span>
+                    <span className="font-bold text-sm">Top Referrers</span>
+                  </div>
+                  <button
+                    onClick={() => setIsTopReferrersOpen(!isTopReferrersOpen)}
+                    className="bg-gray-200 hover:bg-gray-300 rounded-full p-1 transition-colors duration-200"
+                  >
+                    <svg 
+                      className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${isTopReferrersOpen ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
                 </div>
+                {/* Contenu caché qui s'affiche quand ouvert */}
+                {isTopReferrersOpen && (
+                  <div className="border-t border-gray-200 pt-4 mt-4">
+                    <div className="text-gray-500 text-sm">
+                      <p>Aucun référent enregistré pour le moment.</p>
+                      <p className="mt-2">Les référents apparaîtront ici une fois que votre site recevra du trafic depuis d'autres sites web.</p>
+                    </div>
+                  </div>
+                )}
               </div>
               {/* Top Platforms et Top Browsers - côte à côte */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
