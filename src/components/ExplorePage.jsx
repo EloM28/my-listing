@@ -12,7 +12,8 @@ const ExplorePage = () => {
   const [scrollHeight, setScrollHeight] = useState("calc(100vh - 134px)");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const headerRef = useRef(null);
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(true); // true par défaut
+  const [activeTab, setActiveTab] = useState("rent");
   useEffect(() => {
     function handleResize() {
       const headerH = headerRef.current ? headerRef.current.offsetHeight : HEADER_HEIGHT;
@@ -23,12 +24,15 @@ const ExplorePage = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Fonction toggle pour le bouton de ExplorePagination
+  const handleToggleMap = () => setShowMap((prev) => !prev);
+
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
-      <div ref={headerRef}><ExploreHeader /></div>
-      <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col md:flex-row gap-4 px-2 md:px-6 relative">
+      <div ref={headerRef}><ExploreHeader activeTab={activeTab} setActiveTab={setActiveTab} /></div>
+      <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col md:flex-row gap-4 px-0 relative">
         {/* Sidebar desktop (fixe à gauche) */}
-        <div className="hidden md:block md:w-80 flex-shrink-0 md:sticky md:top-[134px] h-fit">
+        <div className="hidden md:block md:w-100 flex-shrink-0 md:sticky h-fit">
           <ExploreSidebar />
         </div>
         {/* Bouton Filters mobile */}
@@ -54,12 +58,12 @@ const ExplorePage = () => {
         <div className="flex-1 flex flex-col" style={{height: scrollHeight}}>
           <div className="flex-1 overflow-y-auto flex flex-col">
             <div className="flex items-center justify-between mb-4">
-              <ExplorePagination onMapClick={() => setShowMap(true)} />
+              <ExplorePagination onMapClick={handleToggleMap} showMap={showMap} />
             </div>
             {showMap ? (
-              <ExploreMap onClose={() => setShowMap(false)} />
+              <ExploreMap onClose={handleToggleMap} />
             ) : (
-              <ExploreResults />
+              <ExploreResults activeTab={activeTab} />
             )}
           </div>
         </div>

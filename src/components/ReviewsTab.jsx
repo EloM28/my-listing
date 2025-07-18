@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ListingSaleCard from "./ListingSaleCard";
+import RentFooter from "./RentFooter";
 
 const ReviewsTab = ({ actions = [] }) => {
   const [rating, setRating] = useState(0);
@@ -130,6 +131,7 @@ const ReviewsTab = ({ actions = [] }) => {
           </div>
         </div>
       </div>
+      <RentFooter />
     </div>
   );
 };
