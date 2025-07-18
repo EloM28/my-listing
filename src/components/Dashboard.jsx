@@ -7,6 +7,7 @@ import Bookmarks from "./Bookmarks";
 import MyListings from "./MyListings";
 import Promotions from "./Promotions";
 import { useAuth } from "./AuthContext";
+import OwnerDashboard from "./OwnerDashboard";
 
 
 // Map tab names to URL param values
@@ -70,7 +71,9 @@ const Dashboard = () => {
   };
 
   let content = null;
-  if (activeTab === "Account details") content = <AccountDetails />;
+  if (user.role === "owner") {
+    content = <OwnerDashboard user={user} />;
+  } else if (activeTab === "Account details") content = <AccountDetails />;
   else if (activeTab === "My Listings") content = <MyListings />;
   else if (activeTab === "Promotions") content = <Promotions />;
   else if (activeTab === "Bookmarks") content = <Bookmarks />;
