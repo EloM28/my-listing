@@ -102,7 +102,11 @@ const AuthForm = () => {
           // Simuler la connexion (localStorage/sessionStorage ou context normalement)
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
-          navigate("/dashboard");
+          navigate("/");
+        } else if (user.role === "owner") {
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+          navigate("/");
         } else {
           setError("Access denied: only customers can sign in here.");
         }
