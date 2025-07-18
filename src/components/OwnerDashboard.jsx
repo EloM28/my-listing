@@ -197,15 +197,6 @@ const OwnerDashboard = ({ user }) => {
                 <span className="font-bold text-sm">Devices</span>
               </div>
             </div>
-            {/* Top Countries */}
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 12l10 7 10-7-10-7-10 7z" strokeWidth="2" /></svg>
-                </span>
-                <span className="font-bold text-sm">Top Countries</span>
-              </div>
-            </div>
           </div>
           {/* Colonne de droite */}
           <div className="flex-1 flex flex-col gap-4 w-full lg:w-auto">
@@ -237,9 +228,9 @@ const OwnerDashboard = ({ user }) => {
               </div>
             </div>
             {/* Grille à côté du chart : Top Referrers, Top Platforms, Top Browsers */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-              {/* Top Referrers */}
-              <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+            <div className="flex flex-col gap-4 w-full">
+              {/* Top Referrers - toute la largeur */}
+              <div className="bg-white rounded-lg shadow border border-gray-200 p-4 w-full">
                 <div className="flex items-center gap-2 mb-6">
                   <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" strokeWidth="2" /></svg>
@@ -247,22 +238,34 @@ const OwnerDashboard = ({ user }) => {
                   <span className="font-bold text-sm">Top Referrers</span>
                 </div>
               </div>
-              {/* Top Platforms */}
-              <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-                <div className="flex items-center gap-2 mb-6">
-                  <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" strokeWidth="2" /></svg>
-                  </span>
-                  <span className="font-bold text-sm">Top Platforms</span>
+              {/* Top Platforms et Top Browsers - côte à côte */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+                {/* Top Platforms */}
+                <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" strokeWidth="2" /></svg>
+                    </span>
+                    <span className="font-bold text-sm">Top Platforms</span>
+                  </div>
                 </div>
-              </div>
-              {/* Top Browsers */}
-              <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-                <div className="flex items-center gap-2 mb-6">
-                  <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /></svg>
-                  </span>
-                  <span className="font-bold text-sm">Top Browsers</span>
+                {/* Top Browsers */}
+                <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /></svg>
+                    </span>
+                    <span className="font-bold text-sm">Top Browsers</span>
+                  </div>
+                </div>
+                {/* Top Countries */}
+                <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 12l10 7 10-7-10-7-10 7z" strokeWidth="2" /></svg>
+                    </span>
+                    <span className="font-bold text-sm">Top Countries</span>
+                  </div>
                 </div>
               </div>
             </div>
