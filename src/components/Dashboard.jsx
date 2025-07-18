@@ -31,7 +31,10 @@ const paramToTab = {
 const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("Dashboard");
+  const tabParam = searchParams.get('tab');
+  const initialTab = tabParam && paramToTab[tabParam] ? paramToTab[tabParam] : "Dashboard";
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [tabError, setTabError] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -42,11 +45,16 @@ const Dashboard = () => {
   // Synchronise l'onglet actif avec l'URL
   useEffect(() => {
     const tabParam = searchParams.get('tab');
-    if (tabParam && paramToTab[tabParam] && paramToTab[tabParam] !== activeTab) {
-      setActiveTab(paramToTab[tabParam]);
-    }
-    if (!tabParam && activeTab !== "Dashboard") {
+    if (tabParam) {
+      if (paramToTab[tabParam]) {
+        setActiveTab(paramToTab[tabParam]);
+        setTabError(false);
+      } else {
+        setTabError(true);
+      }
+    } else {
       setActiveTab("Dashboard");
+      setTabError(false);
     }
   }, [searchParams]);
 
@@ -65,12 +73,25 @@ const Dashboard = () => {
   // Gestion du changement d'onglet
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    setTabError(false);
     if (tab === "Dashboard") {
       setSearchParams({});
     } else if (tabToParam[tab]) {
       setSearchParams({ tab: tabToParam[tab] });
     }
   };
+
+  if (tabError) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+        <div className="bg-white rounded-lg shadow p-8 max-w-md text-center">
+          <h2 className="text-2xl font-bold text-red-500 mb-4">Tab not found</h2>
+          <p className="text-gray-700 mb-6">The tab you requested does not exist. Please check the URL or select a tab from the dashboard.</p>
+          <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded" onClick={() => handleTabChange("Dashboard")}>Go to Dashboard</button>
+        </div>
+      </div>
+    );
+  }
 
   let content = null;
   if (user.role === "owner") {
