@@ -13,6 +13,7 @@ const ExplorePage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const headerRef = useRef(null);
   const [showMap, setShowMap] = useState(false);
+  const [activeTab, setActiveTab] = useState("rent");
   useEffect(() => {
     function handleResize() {
       const headerH = headerRef.current ? headerRef.current.offsetHeight : HEADER_HEIGHT;
@@ -25,7 +26,7 @@ const ExplorePage = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
-      <div ref={headerRef}><ExploreHeader /></div>
+      <div ref={headerRef}><ExploreHeader activeTab={activeTab} setActiveTab={setActiveTab} /></div>
       <div className="flex-1 w-full max-w-[1600px] mx-auto flex flex-col md:flex-row gap-4 px-2 md:px-6 relative">
         {/* Sidebar desktop (fixe à gauche) */}
         <div className="hidden md:block md:w-80 flex-shrink-0 md:sticky md:top-[134px] h-fit">
@@ -59,7 +60,7 @@ const ExplorePage = () => {
             {showMap ? (
               <ExploreMap onClose={() => setShowMap(false)} />
             ) : (
-              <ExploreResults />
+              <ExploreResults activeTab={activeTab} />
             )}
           </div>
         </div>
