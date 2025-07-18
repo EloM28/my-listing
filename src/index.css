@@ -1,3 +1,9 @@
 @import "tailwindcss";
 
-
+@layer utilities {
+  @media (min-width: 500px) and (max-width: 700px) {
+    .text-between-500-700 {
+      font-size: 0.875rem;
+    }
+  }
+}
