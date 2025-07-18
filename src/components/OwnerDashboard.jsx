@@ -128,13 +128,13 @@ const OwnerDashboard = ({ user }) => {
             </div>
           ))}
         </div>
-        {/* Bloc stats + visits */}
+        {/* Layout principal : 2 colonnes en desktop, tout en colonne sur mobile */}
         <div className="flex flex-col lg:flex-row gap-8 mb-8">
-          {/* Colonne gauche : Views + Unique views */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-4 flex-1 max-w-full lg:max-w-xs">
+          {/* Colonne de gauche */}
+          <div className="flex flex-col gap-4 flex-1 max-w-full lg:max-w-md">
             {/* Views */}
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 min-w-[180px]">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+              <div className="flex items-center gap-2 mb-6">
                 <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><circle cx="12" cy="12" r="3" strokeWidth="2" /></svg>
                 </span>
@@ -156,8 +156,8 @@ const OwnerDashboard = ({ user }) => {
               </div>
             </div>
             {/* Unique views */}
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 min-w-[180px]">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+              <div className="flex items-center gap-2 mb-6">
                 <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><circle cx="12" cy="12" r="3" strokeWidth="2" /></svg>
                 </span>
@@ -178,110 +178,93 @@ const OwnerDashboard = ({ user }) => {
                 ))}
               </div>
             </div>
-          </div>
-          {/* Card Visits (chart) */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 w-full mt-4 lg:mt-0">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M8 12h8" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Visits</span>
-              <div className="ml-auto flex gap-1">
-                {periods.map(p => (
-                  <button
-                    key={p.value}
-                    className={`px-2 py-0.5 rounded-full text-xs border ${selectedPeriod === p.value ? "bg-red-500 text-white" : "bg-white text-gray-700"}`}
-                    onClick={() => setSelectedPeriod(p.value)}
-                  >
-                    {p.label}
-                  </button>
-                ))}
+            {/* Button clicks */}
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M12 8v4l3 3" strokeWidth="2" /></svg>
+                </span>
+                <span className="font-bold text-sm">Button clicks</span>
+              </div>
+              <div className="text-gray-500 text-xs">No click stats recorded yet.</div>
+            </div>
+            {/* Devices */}
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" strokeWidth="2" /></svg>
+                </span>
+                <span className="font-bold text-sm">Devices</span>
               </div>
             </div>
-            <div className="w-full h-64">
-               <Line data={chartData} options={{...chartOptions, maintainAspectRatio: false, responsive: true}} width={null} height={null} style={{ width: '100%' }} />
-            </div>
-            <div className="flex justify-center gap-4 mt-2 text-xs">
-              <span className="flex items-center gap-1 text-red-500 font-bold"><span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>Views</span>
-              <span className="flex items-center gap-1 text-blue-500 font-bold"><span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>Unique views</span>
+            {/* Top Countries */}
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 12l10 7 10-7-10-7-10 7z" strokeWidth="2" /></svg>
+                </span>
+                <span className="font-bold text-sm">Top Countries</span>
+              </div>
             </div>
           </div>
-        </div>
-        {/* Autres stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {/* Unique views */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><circle cx="12" cy="12" r="3" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Unique views</span>
-            </div>
-            <div className="flex justify-between mb-2">
-              {periods.map(p => (
-                <div key={p.value} className="text-center">
-                  <div className="text-base font-bold">0</div>
-                  <div className="text-xs text-gray-500">{p.label}</div>
+          {/* Colonne de droite */}
+          <div className="flex-1 flex flex-col gap-4 w-full lg:w-auto">
+            {/* Visits (chart) */}
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4 w-full">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M8 12h8" strokeWidth="2" /></svg>
+                </span>
+                <span className="font-bold text-sm">Visits</span>
+                <div className="ml-auto flex gap-1">
+                  {periods.map(p => (
+                    <button
+                      key={p.value}
+                      className={`px-2 py-0.5 rounded-full text-xs border ${selectedPeriod === p.value ? "bg-red-500 text-white" : "bg-white text-gray-700"}`}
+                      onClick={() => setSelectedPeriod(p.value)}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="w-full h-48">
+                <Line data={chartData} options={{...chartOptions, maintainAspectRatio: false, responsive: true}} width={null} height={null} style={{ width: '100%' }} />
+              </div>
+              <div className="flex justify-center gap-4 mt-2 text-xs">
+                <span className="flex items-center gap-1 text-red-500 font-bold"><span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>Views</span>
+                <span className="flex items-center gap-1 text-blue-500 font-bold"><span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>Unique views</span>
+              </div>
             </div>
-          </div>
-          {/* Button clicks */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M12 8v4l3 3" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Button clicks</span>
-            </div>
-            <div className="text-gray-500 text-xs">No click stats recorded yet.</div>
-          </div>
-          {/* Devices */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Devices</span>
-            </div>
-          </div>
-          {/* Top Countries */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 12l10 7 10-7-10-7-10 7z" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Top Countries</span>
-            </div>
-          </div>
-        </div>
-        {/* Referrers, Platforms, Browsers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {/* Top Referrers */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Top Referrers</span>
-            </div>
-          </div>
-          {/* Top Platforms */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Top Platforms</span>
-            </div>
-          </div>
-          {/* Top Browsers */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Top Browsers</span>
+            {/* Grille à côté du chart : Top Referrers, Top Platforms, Top Browsers */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+              {/* Top Referrers */}
+              <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" strokeWidth="2" /></svg>
+                  </span>
+                  <span className="font-bold text-sm">Top Referrers</span>
+                </div>
+              </div>
+              {/* Top Platforms */}
+              <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" strokeWidth="2" /></svg>
+                  </span>
+                  <span className="font-bold text-sm">Top Platforms</span>
+                </div>
+              </div>
+              {/* Top Browsers */}
+              <div className="bg-white rounded-lg shadow border border-gray-200 p-4">
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /></svg>
+                  </span>
+                  <span className="font-bold text-sm">Top Browsers</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
