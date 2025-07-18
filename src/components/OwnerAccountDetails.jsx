@@ -13,6 +13,7 @@ const OwnerAccountDetails = () => {
     confirmPassword: "",
     facebookUrl: "http://facebook.com"
   });
+  const [profilePic, setProfilePic] = useState(null); // Ajouté
   const [showPasswords, setShowPasswords] = useState({
     current: false,
     new: false,
@@ -63,8 +64,8 @@ const OwnerAccountDetails = () => {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.size <= 1024 * 1024) { // 1MB limit
+      setProfilePic(file); // Ajouté
       console.log("Profile picture uploaded:", file.name);
-      alert("Profile picture uploaded successfully!");
     } else {
       alert("File size must be less than 1 MB");
     }
@@ -114,6 +115,20 @@ const OwnerAccountDetails = () => {
                 <span className="text-xs text-gray-400">Upload</span>
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
               </label>
+              {/* Aperçu de l'image uploadée */}
+              {profilePic && (
+                <div className="relative w-20 h-20 flex-shrink-0">
+                  <img src={URL.createObjectURL(profilePic)} alt="Preview" className="w-full h-full object-cover rounded-md" />
+                  <button
+                    type="button"
+                    onClick={() => setProfilePic(null)}
+                    className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1 shadow"
+                    title="Remove"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                  </button>
+                </div>
+              )}
             </div>
             <span className="text-xs text-gray-500 mt-1 block">Maximum file size: 1 MB.</span>
           </div>
