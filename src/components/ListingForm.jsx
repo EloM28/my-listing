@@ -9,8 +9,7 @@ const sections = [
   { id: "pricing", label: "Pricing" },
 ];
 
-const inputClass =
-  "block w-full bg-transparent border-0 border-b border-b-2 border-gray-200 focus:border-b-red-500 focus:border-t-0 focus:border-l-0 focus:border-r-0 focus:ring-0 text-base py-2 transition placeholder-gray-400 outline-none shadow-none";
+const inputClass = "block w-full bg-transparent border-0 border-b border-b-2 border-gray-200 focus:border-b-red-500 focus:border-t-0 focus:border-l-0 focus:border-r-0 focus:ring-0 text-base py-2 transition placeholder-gray-400 outline-none shadow-none";
 
 const ListingForm = () => {
   const [activeSection, setActiveSection] = useState("general");
@@ -133,7 +132,7 @@ const ListingForm = () => {
             </section>
           ))}
           {/* Boutons dynamiques */}
-          <div className="flex flex-col gap-4 mt-8">
+          <div className="flex flex-col gap-4">
             <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
               <span>Submit listing</span>
             </button>
