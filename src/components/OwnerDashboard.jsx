@@ -55,7 +55,7 @@ const OwnerDashboard = ({ user }) => {
     datasets: [
       {
         label: "Views",
-        data: [0, 0, 0, 0, 0, 0, 0],
+        data: [0, 0.3, 0, 0, 0, 0, 0],
         borderColor: "#f43f5e",
         backgroundColor: "#f43f5e22",
         pointBackgroundColor: "#f43f5e",
@@ -128,27 +128,59 @@ const OwnerDashboard = ({ user }) => {
             </div>
           ))}
         </div>
-        {/* Filtres et graphiques */}
+        {/* Bloc stats + visits */}
         <div className="flex flex-col lg:flex-row gap-8 mb-8">
-          {/* Views */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 min-w-[220px]">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><circle cx="12" cy="12" r="3" strokeWidth="2" /></svg>
-              </span>
-              <span className="font-bold text-sm">Views</span>
+          {/* Colonne gauche : Views + Unique views */}
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-4 flex-1 max-w-full lg:max-w-xs">
+            {/* Views */}
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 min-w-[180px]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><circle cx="12" cy="12" r="3" strokeWidth="2" /></svg>
+                </span>
+                <span className="font-bold text-sm">Views</span>
+              </div>
+              <div className="flex justify-between mb-2">
+                {periods.map(p => (
+                  <div key={p.value} className="text-center flex flex-col items-center">
+                    {/* Trois barres verticales */}
+                    <div className="flex gap-0.5 mb-1">
+                      <span className="w-0.5 h-3 bg-gray-300 rounded"></span>
+                      <span className="w-0.5 h-4 bg-gray-400 rounded"></span>
+                      <span className="w-0.5 h-2 bg-gray-200 rounded"></span>
+                    </div>
+                    <div className="text-base font-bold">0</div>
+                    <div className="text-xs text-gray-500">{p.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex justify-between mb-2">
-              {periods.map(p => (
-                <div key={p.value} className="text-center">
-                  <div className="text-base font-bold">0</div>
-                  <div className="text-xs text-gray-500">{p.label}</div>
-                </div>
-              ))}
+            {/* Unique views */}
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 min-w-[180px]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><circle cx="12" cy="12" r="3" strokeWidth="2" /></svg>
+                </span>
+                <span className="font-bold text-sm">Unique views</span>
+              </div>
+              <div className="flex justify-between mb-2">
+                {periods.map(p => (
+                  <div key={p.value} className="text-center flex flex-col items-center">
+                    {/* Trois barres verticales */}
+                    <div className="flex gap-0.5 mb-1">
+                      <span className="w-0.5 h-3 bg-gray-300 rounded"></span>
+                      <span className="w-0.5 h-4 bg-gray-400 rounded"></span>
+                      <span className="w-0.5 h-2 bg-gray-200 rounded"></span>
+                    </div>
+                    <div className="text-base font-bold">0</div>
+                    <div className="text-xs text-gray-500">{p.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          {/* Visits (chart) */}
-          <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 min-w-[320px]">
+          {/* Card Visits (chart) */}
+          <div className="bg-white rounded-lg shadow border border-gray-200 p-4 flex-1 w-full mt-4 lg:mt-0">
             <div className="flex items-center gap-2 mb-2">
               <span className="bg-red-500 rounded-full p-1 flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" strokeWidth="2" /><path d="M8 12h8" strokeWidth="2" /></svg>
@@ -166,8 +198,8 @@ const OwnerDashboard = ({ user }) => {
                 ))}
               </div>
             </div>
-            <div className="h-48 w-full">
-              <Line data={chartData} options={chartOptions} />
+            <div className="w-full h-64">
+               <Line data={chartData} options={{...chartOptions, maintainAspectRatio: false, responsive: true}} width={null} height={null} style={{ width: '100%' }} />
             </div>
             <div className="flex justify-center gap-4 mt-2 text-xs">
               <span className="flex items-center gap-1 text-red-500 font-bold"><span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>Views</span>
