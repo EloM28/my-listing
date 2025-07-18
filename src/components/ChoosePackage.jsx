@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 const packages = [
   {
     name: "BASIC",
-    price: "£7.90",
+    price: "100.000BIF",
     features: [
       "One listing submission",
       "90 days expiration",
@@ -15,7 +15,7 @@ const packages = [
   },
   {
     name: "ADVANCED",
-    price: "£19.90",
+    price: "180.000BIF",
     features: [
       "Five listing submissions",
       "180 days expiration",
@@ -26,7 +26,7 @@ const packages = [
   },
   {
     name: "PREMIUM",
-    price: "£29.90",
+    price: "250.000BIF",
     features: [
       "Ten listing submissions",
       "360 days expiration",
