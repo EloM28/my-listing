@@ -4,13 +4,27 @@ import { useAuth } from "./AuthContext";
 
 const CustomerRestriction = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, setUser } = useAuth();
 
   const handleSwitchAccount = () => {
-    // Déconnecter l'utilisateur actuel
-    logout();
-    // Rediriger vers la page de connexion
-    navigate("/signin");
+    const confirmed = window.confirm("Are you sure you want to switch to a Property owner account? This is an irreversible action.");
+    
+    if (confirmed) {
+      // Changer le rôle de l'utilisateur de "customer" à "owner"
+      const updatedUser = {
+        ...user,
+        role: "owner"
+      };
+      
+      // Mettre à jour dans le localStorage
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      
+      // Mettre à jour dans le contexte d'authentification
+      setUser(updatedUser);
+      
+      // Rediriger vers les détails du compte owner
+      navigate("/dashboard?tab=account");
+    }
   };
 
   return (
