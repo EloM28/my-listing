@@ -20,7 +20,7 @@ const AccountDetails = () => {
   });
   const navigate = useNavigate();
   const [activeTab] = useState("Account details");
-  const { user: authUser } = useAuth();
+  const { user: authUser, setUser: setAuthUser } = useAuth();
 
   useEffect(() => {
     if (!authUser) navigate('/signin');
@@ -61,9 +61,24 @@ const AccountDetails = () => {
   };
 
   const handleSwitchToOwner = () => {
-    // Ici vous pouvez ajouter la logique pour changer le type de compte
-    console.log("Switching to Property owner");
-    alert("Account type changed to Property owner!");
+    const confirmed = window.confirm("Are you sure you want to switch to a Property owner account? This is an irreversible action.");
+    
+    if (confirmed) {
+      // Changer le rôle de l'utilisateur de "customer" à "owner"
+      const updatedUser = {
+        ...user,
+        role: "owner"
+      };
+      
+      // Mettre à jour dans le localStorage
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      
+      // Mettre à jour dans le contexte d'authentification
+      setAuthUser(updatedUser);
+      
+      // Rediriger vers les détails du compte owner
+      navigate("/dashboard?tab=account");
+    }
   };
 
   // Pour le menu, on désactive les autres onglets
@@ -242,7 +257,7 @@ const AccountDetails = () => {
 
               <button
                 onClick={handleSwitchToOwner}
-                className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-md transition-colors duration-200"
+                className="w-full bg-gray-200 hover:bg-red-500 hover:text-white text-gray-800 font-semibold py-3 px-6 rounded-md transition-colors duration-200"
               >
                 Switch to Property owner
               </button>
