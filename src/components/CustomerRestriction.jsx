@@ -14,7 +14,7 @@ const CustomerRestriction = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen  bg-gray-100 flex flex-col items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
         <div className="mb-6">
           <svg 
@@ -33,11 +33,11 @@ const CustomerRestriction = () => {
         </div>
         
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Accès restreint
+          Access denied
         </h1>
         
         <p className="text-gray-600 mb-6 leading-relaxed">
-          Vous devez avoir un compte <strong>Property owner</strong> pour créer des annonces.
+        You must switch to a <strong>Property owner</strong> account to add new listings.
         </p>
         
         <div className="space-y-3">
@@ -45,21 +45,21 @@ const CustomerRestriction = () => {
             onClick={handleSwitchAccount}
             className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
           >
-            Changer de compte
+            Switch account
           </button>
           
           <button
             onClick={() => navigate("/")}
             className="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
           >
-            Retour à l'accueil
+            Back to Home
           </button>
         </div>
         
         <div className="mt-6 pt-6 border-t border-gray-200">
           <p className="text-sm text-gray-500">
-            Les comptes "Customer" peuvent uniquement consulter les annonces. 
-            Pour créer des annonces, vous devez vous inscrire en tant que "Property owner".
+            "Customer" accounts can only view listings.
+            To create listings, you must register as a "Property Owner."
           </p>
         </div>
       </div>
