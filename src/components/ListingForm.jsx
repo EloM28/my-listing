@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
+import CustomerRestriction from "./CustomerRestriction";
 
 // Composant réutilisable pour upload d'image avec drag & drop et aperçu
 function ImageUpload({ label, multiple = false, onChange, value }) {
@@ -85,6 +87,7 @@ const sections = [
 const inputClass = "block w-full bg-transparent border-0 border-b border-b-2 border-gray-200 focus:border-b-red-500 focus:border-t-0 focus:border-l-0 focus:border-r-0 focus:ring-0 text-base py-2 transition placeholder-gray-400 outline-none shadow-none";
 
 const ListingForm = () => {
+  const { user } = useAuth();
   const [activeSection, setActiveSection] = useState("general");
   const sectionRefs = useRef({});
   const navRef = useRef();
@@ -127,6 +130,11 @@ const ListingForm = () => {
     setStatus("preview");
     alert("Preview mode!");
   };
+
+  // Si l'utilisateur est connecté mais a le rôle "customer", afficher la restriction
+  if (user && user.role === "customer") {
+    return <CustomerRestriction />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-2">
