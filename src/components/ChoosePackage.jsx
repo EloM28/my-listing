@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const packages = [
   {
@@ -40,10 +41,20 @@ const packages = [
 const ChoosePackage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const params = new URLSearchParams(location.search);
   const type = params.get('type');
 
   const handleBuy = (pkg) => {
+    // Vérifier si l'utilisateur est connecté
+    if (!user) {
+      // Rediriger vers la page de connexion avec les paramètres de retour
+      const returnUrl = `/choose-package?type=${type}`;
+      navigate(`/signin?returnUrl=${encodeURIComponent(returnUrl)}&selectedPackage=${pkg.name.toLowerCase()}`);
+      return;
+    }
+    
+    // Si l'utilisateur est connecté, continuer normalement
     navigate(`/listing-form?type=${type}&package=${pkg.name.toLowerCase()}`);
   };
 
