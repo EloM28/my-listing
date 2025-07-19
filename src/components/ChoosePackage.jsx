@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
@@ -57,6 +57,16 @@ const ChoosePackage = () => {
     // Si l'utilisateur est connecté, continuer normalement
     navigate(`/listing-form?type=${type}&package=${pkg.name.toLowerCase()}`);
   };
+
+  // Vérifier s'il y a un package sélectionné après connexion
+  const selectedPackage = params.get('selectedPackage');
+  
+  // Si un package a été sélectionné et que l'utilisateur est connecté, continuer automatiquement
+  useEffect(() => {
+    if (selectedPackage && user && type) {
+      navigate(`/listing-form?type=${type}&package=${selectedPackage}`);
+    }
+  }, [selectedPackage, user, type, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-2 py-8">
