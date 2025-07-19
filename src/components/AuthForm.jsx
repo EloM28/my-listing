@@ -102,11 +102,39 @@ const AuthForm = () => {
           // Simuler la connexion (localStorage/sessionStorage ou context normalement)
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
-          navigate("/");
+          
+          // Vérifier s'il y a une URL de retour
+          const searchParams = new URLSearchParams(location.search);
+          const returnUrl = searchParams.get('returnUrl');
+          const selectedPackage = searchParams.get('selectedPackage');
+          
+          if (returnUrl) {
+            // Rediriger vers l'URL de retour avec le package sélectionné
+            const redirectUrl = selectedPackage 
+              ? `${returnUrl}&selectedPackage=${selectedPackage}`
+              : returnUrl;
+            navigate(redirectUrl);
+          } else {
+            navigate("/");
+          }
         } else if (user.role === "owner") {
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
-          navigate("/");
+          
+          // Vérifier s'il y a une URL de retour
+          const searchParams = new URLSearchParams(location.search);
+          const returnUrl = searchParams.get('returnUrl');
+          const selectedPackage = searchParams.get('selectedPackage');
+          
+          if (returnUrl) {
+            // Rediriger vers l'URL de retour avec le package sélectionné
+            const redirectUrl = selectedPackage 
+              ? `${returnUrl}&selectedPackage=${selectedPackage}`
+              : returnUrl;
+            navigate(redirectUrl);
+          } else {
+            navigate("/");
+          }
         } else {
           setError("Access denied: only customers can sign in here.");
         }
