@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import CustomerRestriction from "./CustomerRestriction";
 
 const packages = [
   {
@@ -67,6 +68,11 @@ const ChoosePackage = () => {
       navigate(`/listing-form?type=${type}&package=${selectedPackage}`);
     }
   }, [selectedPackage, user, type, navigate]);
+
+  // Si l'utilisateur est connecté mais a le rôle "customer", afficher la restriction
+  if (user && user.role === "customer") {
+    return <CustomerRestriction />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-2 py-8">
