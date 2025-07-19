@@ -68,6 +68,11 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Fermer le dropdown utilisateur quand l'utilisateur change
+  useEffect(() => {
+    setUserDropdown(false);
+  }, [user]);
+
   const mobileDropdowns = {
     Explore: [
       { label: "Explore 1", href: "/explore" }
@@ -334,7 +339,7 @@ const Navbar = () => {
             {/* Croix pour fermer le drawer */}
             <div className="flex items-center justify-between px-4 pt-4 pb-2">
               {user && (
-                <div className="flex items-center gap-2 cursor-pointer select-none" onClick={e => { e.stopPropagation(); setUserDropdown((prev) => !prev); setOpenDropdown('') }}>
+                <div className="flex items-center gap-2 cursor-pointer select-none" onClick={e => { e.stopPropagation(); setUserDropdown((prev) => !prev); setOpenDropdown(''); }}>
                   <span className="bg-pink-200 text-pink-800 rounded-full w-9 h-9 flex items-center justify-center font-bold uppercase">{user.name[0]}</span>
                   <span className="font-medium text-gray-700 text-lg">{user.name}</span>
                   <svg className={`w-5 h-5 ml-1 transition-transform ${userDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
