@@ -4,6 +4,7 @@ import CustomerRestriction from "./CustomerRestriction";
 import 'react-quill/dist/quill.snow.css';
 import QuillEditor from "./QuillEditor";
 import ImageUpload from "./ImageUpload";
+import LocationPicker from "./LocationPicker";
 
 const sections = [
   { id: "general", label: "General" },
@@ -31,6 +32,8 @@ const ListingForm = () => {
   const [range, setRange] = useState();
   const [lastChange, setLastChange] = useState();
   const [readOnly, setReadOnly] = useState(false);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  const [locationData, setLocationData] = useState(null);
 
 
   // Scrollspy: détecte la section visible
@@ -168,8 +171,7 @@ const ListingForm = () => {
                 )}
                 {s.id === "location" && (
                   <>
-                    <label className="font-medium">Region (optional)<input className={inputClass} type="text" placeholder="Region" /></label>
-                    {/* <label className="font-medium mb-2">Region <span className="text-gray-500">(optional)</span>
+                    <label className="font-medium mb-2">Region <span className="text-gray-500">(optional)</span>
                       <select className="block w-full bg-gray-50 border border-gray-200 rounded px-4 py-3 mt-2 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 appearance-none" defaultValue="">
                         <option value="" disabled>Select an option</option>
                         <option value="paris">Paris</option>
@@ -178,9 +180,20 @@ const ListingForm = () => {
                         <option value="bordeaux">Bordeaux</option>
                         <option value="autre">Autre</option>
                       </select>
-                    </label> */}
+                    </label>
                     <label className="font-medium mt-4">Location
-                      <button type="button" className="block w-full bg-gray-100 border border-gray-200 rounded px-4 py-2 mt-2 text-base text-gray-500 text-center cursor-pointer hover:bg-gray-200 transition">Add Location</button>
+                      {!showLocationPicker && !locationData && (
+                        <button type="button" className="block w-full bg-gray-100 border border-gray-200 rounded px-4 py-4 mt-2 text-base text-gray-500 text-center cursor-pointer hover:bg-gray-200 transition" onClick={() => setShowLocationPicker(true)}>
+                          Add Location
+                        </button>
+                      )}
+                      {(showLocationPicker || locationData) && (
+                        <LocationPicker
+                          value={locationData || {}}
+                          onChange={setLocationData}
+                          onRemove={() => { setLocationData(null); setShowLocationPicker(false); }}
+                        />
+                      )}
                     </label>
                   </>
                 )}
