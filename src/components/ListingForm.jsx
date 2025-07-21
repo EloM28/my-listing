@@ -169,8 +169,19 @@ const ListingForm = () => {
                 {s.id === "location" && (
                   <>
                     <label className="font-medium">Region (optional)<input className={inputClass} type="text" placeholder="Region" /></label>
-                    <label className="font-medium">Location<input className={inputClass} type="text" placeholder="Location" /></label>
-                    <div className="mt-2">Map placeholder</div>
+                    {/* <label className="font-medium mb-2">Region <span className="text-gray-500">(optional)</span>
+                      <select className="block w-full bg-gray-50 border border-gray-200 rounded px-4 py-3 mt-2 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 appearance-none" defaultValue="">
+                        <option value="" disabled>Select an option</option>
+                        <option value="paris">Paris</option>
+                        <option value="lyon">Lyon</option>
+                        <option value="marseille">Marseille</option>
+                        <option value="bordeaux">Bordeaux</option>
+                        <option value="autre">Autre</option>
+                      </select>
+                    </label> */}
+                    <label className="font-medium mt-4">Location
+                      <button type="button" className="block w-full bg-gray-100 border border-gray-200 rounded px-4 py-2 mt-2 text-base text-gray-500 text-center cursor-pointer hover:bg-gray-200 transition">Add Location</button>
+                    </label>
                   </>
                 )}
                 {s.id === "pricing" && (
