@@ -32,8 +32,7 @@ const ListingForm = () => {
   const [range, setRange] = useState();
   const [lastChange, setLastChange] = useState();
   const [readOnly, setReadOnly] = useState(false);
-  const [showLocationPicker, setShowLocationPicker] = useState(false);
-  const [locationData, setLocationData] = useState(null);
+  const [locations, setLocations] = useState([]);
 
 
   // Scrollspy: détecte la section visible
@@ -182,18 +181,17 @@ const ListingForm = () => {
                       </select>
                     </label>
                     <label className="font-medium mt-4">Location
-                      {!showLocationPicker && !locationData && (
-                        <button type="button" className="block w-full bg-gray-100 border border-gray-200 rounded px-4 py-4 mt-2 text-base text-gray-500 text-center cursor-pointer hover:bg-gray-200 transition" onClick={() => setShowLocationPicker(true)}>
-                          Add Location
-                        </button>
-                      )}
-                      {(showLocationPicker || locationData) && (
+                      <button type="button" className="block w-full bg-gray-100 border border-gray-200 rounded px-4 py-4 mt-2 text-base text-gray-500 text-center cursor-pointer hover:bg-gray-200 transition mb-4" onClick={() => setLocations([...locations, {}])}>
+                        Add Location
+                      </button>
+                      {locations.map((loc, idx) => (
                         <LocationPicker
-                          value={locationData || {}}
-                          onChange={setLocationData}
-                          onRemove={() => { setLocationData(null); setShowLocationPicker(false); }}
+                          key={idx}
+                          value={loc}
+                          onChange={val => setLocations(locations.map((l, i) => i === idx ? val : l))}
+                          onRemove={() => setLocations(locations.filter((_, i) => i !== idx))}
                         />
-                      )}
+                      ))}
                     </label>
                   </>
                 )}
