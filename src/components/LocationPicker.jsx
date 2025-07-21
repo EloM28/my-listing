@@ -25,7 +25,13 @@ const LocationPicker = ({ value = {}, onChange, onRemove }) => {
 
     markerRef.current.on('dragend', () => {
       const { lat, lng } = markerRef.current.getLngLat();
-      onChange && onChange({ ...value, lat, lng });
+      fetchAddress(lat, lng);
+    });
+
+    map.on('click', (e) => {
+      const { lng, lat } = e.lngLat;
+      markerRef.current.setLngLat([lng, lat]);
+      fetchAddress(lat, lng);
     });
 
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -39,6 +45,18 @@ const LocationPicker = ({ value = {}, onChange, onRemove }) => {
       markerRef.current.setLngLat([lng, lat]);
     }
   }, [lat, lng]);
+
+  // Fonction pour faire le reverse geocoding
+  const fetchAddress = async (lat, lng) => {
+    try {
+      const resp = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`);
+      const data = await resp.json();
+      const place = data.features && data.features[0] ? data.features[0].place_name : '';
+      onChange && onChange({ address: place, lat, lng });
+    } catch (e) {
+      onChange && onChange({ address: '', lat, lng });
+    }
+  };
 
   return (
     <div className="bg-white rounded-xl shadow p-4 flex flex-col gap-2 mt-4">
