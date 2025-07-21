@@ -1,6 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "./AuthContext";
 import CustomerRestriction from "./CustomerRestriction";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import Quill from "quill";
+import QuillEditor from "./QuillEditor";
 
 // Composant réutilisable pour upload d'image avec drag & drop et aperçu
 function ImageUpload({ label, multiple = false, onChange, value }) {
@@ -91,10 +95,18 @@ const ListingForm = () => {
   const [activeSection, setActiveSection] = useState("general");
   const sectionRefs = useRef({});
   const navRef = useRef();
+  const quillRef = useRef();
   const [form, setForm] = useState({});
   const [status, setStatus] = useState("");
   const [coverImage, setCoverImage] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [description, setDescription] = useState('');
+
+  const Delta = Quill.import('delta');
+  const [range, setRange] = useState();
+  const [lastChange, setLastChange] = useState();
+  const [readOnly, setReadOnly] = useState(false);
+
 
   // Scrollspy: détecte la section visible
   useEffect(() => {
@@ -174,7 +186,37 @@ const ListingForm = () => {
                   <>
                     <label className="font-medium">Title<input className={inputClass} type="text" placeholder="Title" /></label>
                     <label className="font-medium">Tagline<input className={inputClass} type="text" placeholder="Tagline" /></label>
-                    <label className="font-medium">Description<textarea className={inputClass + " resize-none min-h-[80px]"} placeholder="Description" /></label>
+                    <label className="font-medium">
+                      Description
+                      {/* <ReactQuill
+                        ref={quillRef}
+                        className={inputClass + " resize-none min-h-[80px]"}
+                        theme="snow"
+                        value={description}
+                        onChange={setDescription}
+                        placeholder="Description"
+                      /> */}
+                      <QuillEditor
+                        ref={quillRef}
+                        readOnly={readOnly}
+                        onSelectionChange={setRange}
+                        onTextChange={setLastChange}
+                    />
+                    </label>
+                    {/* <Editor
+                      ref={quillRef}
+                      readOnly={readOnly}
+                      defaultValue={new Delta()
+                        .insert('Hello')
+                        .insert('\n', { header: 1 })
+                        .insert('Some ')
+                        .insert('initial', { bold: true })
+                        .insert(' ')
+                        .insert('content', { underline: true })
+                        .insert('\n')}
+                      onSelectionChange={setRange}
+                      onTextChange={setLastChange}
+                    /> */}
                   </>
                 )}
                 {s.id === "images" && (
