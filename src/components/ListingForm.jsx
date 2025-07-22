@@ -181,9 +181,6 @@ const ListingForm = () => {
                       </select>
                     </label>
                     <label className="font-medium mt-4">Location
-                      <button type="button" className="block w-full bg-gray-100 border border-gray-200 rounded px-4 py-4 mt-2 text-base text-gray-500 text-center cursor-pointer hover:bg-gray-200 transition mb-4" onClick={() => setLocations([...locations, {}])}>
-                        Add Location
-                      </button>
                       {locations.map((loc, idx) => (
                         <LocationPicker
                           key={idx}
@@ -192,6 +189,14 @@ const ListingForm = () => {
                           onRemove={() => setLocations(locations.filter((_, i) => i !== idx))}
                         />
                       ))}
+                      <button
+                        type="button"
+                        className={`block w-full bg-gray-100 border border-gray-200 rounded px-4 py-4 mt-4 text-base text-gray-500 text-center transition ${locations.length >= 1 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-200'}`}
+                        onClick={() => locations.length < 1 && setLocations([...locations, {}])}
+                        disabled={locations.length >= 1}
+                      >
+                        Add Location
+                      </button>
                     </label>
                   </>
                 )}
