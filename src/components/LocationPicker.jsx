@@ -9,15 +9,18 @@ const defaultCenter = { lat: -3.49889, lng: 29.3968  }; // Bujumbura par défaut
 const LocationPicker = ({ value = {}, onChange, onRemove }) => {
   const mapContainerRef = useRef(null);
   const markerRef = useRef(null);
+  const mapRef = useRef(null);
   const { address = '', lat = defaultCenter.lat, lng = defaultCenter.lng } = value;
 
   useEffect(() => {
+    if (mapRef.current) return; // Ne crée la carte qu'une seule fois
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: 12,
     });
+    mapRef.current = map;
 
     markerRef.current = new mapboxgl.Marker({ draggable: true })
       .setLngLat([lng, lat])
@@ -36,8 +39,11 @@ const LocationPicker = ({ value = {}, onChange, onRemove }) => {
 
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    return () => map.remove();
-  }, []); // eslint-disable-line
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
 
   // Si lat/lng changent via props, déplacer le marker
   useEffect(() => {
