@@ -149,7 +149,7 @@ const ListingForm = () => {
                 {s.id === "location" && (
                   <>
                     <label className="font-medium mb-2">Region <span className="text-gray-500">(optional)</span>
-                      <select className="block w-full bg-gray-50 border border-gray-200 rounded px-4 py-3 mt-2 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 appearance-none" defaultValue="">
+                      <select className="block w-full bg-gray-50 border border-gray-200 rounded px-4 py-2 mt-2 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-200 appearance-none" defaultValue="">
                         <option value="" disabled>Select an option</option>
                         <option value="paris">Paris</option>
                         <option value="lyon">Lyon</option>
@@ -188,14 +188,14 @@ const ListingForm = () => {
           ))}
           {/* Boutons dynamiques */}
           <div className="flex flex-col gap-4">
-            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
+            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
               <span>Submit listing</span>
             </button>
             <div className="flex flex-col md:flex-row gap-4 w-full">
-              <button type="button" onClick={handlePreview} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
+              <button type="button" onClick={handlePreview} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-2 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
                 <span>Preview</span>
               </button>
-              <button type="button" onClick={handleDraft} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
+              <button type="button" onClick={handleDraft} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-2 px-8 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center gap-2">
                 <span>Save as draft</span>
               </button>
             </div>
