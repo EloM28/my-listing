@@ -48,7 +48,7 @@ const ShopProducts = () => {
         <div className="text-gray-700 text-sm whitespace-nowrap">Showing all 3 results</div>
         <div className="relative w-40" ref={sortRef}>
           <button
-            className="flex items-center justify-between w-40 px-2 py-1 border-b border-gray-200 font-normal text-gray-900 bg-white focus:outline-none text-sm"
+            className="flex items-center justify-between w-40 px-2 py-1 border-b border-gray-200 font-medium text-gray-900 bg-white focus:outline-none text-sm"
             onClick={() => setSortOpen((o) => !o)}
           >
             {selectedSort}
