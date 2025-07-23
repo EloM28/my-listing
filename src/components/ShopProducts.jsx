@@ -3,17 +3,17 @@ import React, { useState, useRef, useEffect } from "react";
 const products = [
   {
     name: "Advanced",
-    price: "£19.90",
+    price: "230.000BIF",
     image: null,
   },
   {
     name: "Basic",
-    price: "£7.90",
+    price: "100.000BIF",
     image: null,
   },
   {
     name: "Premium",
-    price: "£29.90",
+    price: "180.000BIF",
     image: null,
   },
 ];
@@ -48,7 +48,7 @@ const ShopProducts = () => {
         <div className="text-gray-700 text-base md:text-lg">Showing all 3 results</div>
         <div className="relative w-full md:w-auto" ref={sortRef}>
           <button
-            className="flex items-center justify-between w-full md:w-56 px-4 py-2 border-b border-gray-200 font-semibold text-gray-900 bg-white focus:outline-none"
+            className="flex items-center justify-between w-full md:w-56 px-4 py-2 border-b border-gray-200 font-normal text-gray-900 bg-white focus:outline-none"
             onClick={() => setSortOpen((o) => !o)}
           >
             {selectedSort}
@@ -59,7 +59,7 @@ const ShopProducts = () => {
               {sortOptions.map((option) => (
                 <button
                   key={option}
-                  className={`w-full text-left px-4 py-3 text-gray-900 hover:bg-gray-50 font-semibold ${selectedSort === option ? 'bg-gray-100' : ''}`}
+                  className={`w-full text-left px-4 py-3 text-gray-900 hover:bg-gray-50 font-normal ${selectedSort === option ? 'bg-gray-100' : ''}`}
                   onClick={() => { setSelectedSort(option); setSortOpen(false); }}
                 >
                   {option} {selectedSort === option && <span className="float-right">✔</span>}
@@ -72,9 +72,9 @@ const ShopProducts = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {products.map((prod) => (
           <div key={prod.name} className="bg-white rounded-lg shadow flex flex-col items-center p-6">
-            <div className="w-full aspect-square bg-red-500 flex items-center justify-center rounded mb-6">
+            <div className="w-full aspect-square bg-red-400 flex items-center justify-center rounded mb-4">
               {/* Icône maison+localisation blanche */}
-              <svg className="w-28 h-28 text-white" fill="none" stroke="currentColor" viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" strokeWidth="4" /><path d="M32 34v14" strokeWidth="4" /><path d="M22 48h20" strokeWidth="4" /><path d="M32 34l-8 8h16l-8-8z" strokeWidth="4" /><path d="M32 14v-4" strokeWidth="4" /><path d="M32 58c14-10 20-18 20-28A20 20 0 0 0 12 30c0 10 6 18 20 28z" strokeWidth="4" /></svg>
+              <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" strokeWidth="4" /><path d="M32 34v14" strokeWidth="4" /><path d="M22 48h20" strokeWidth="4" /><path d="M32 34l-8 8h16l-8-8z" strokeWidth="4" /><path d="M32 14v-4" strokeWidth="4" /><path d="M32 58c14-10 20-18 20-28A20 20 0 0 0 12 30c0 10 6 18 20 28z" strokeWidth="4" /></svg>
             </div>
             <div className="w-full flex flex-col items-start">
               <div className="font-bold text-lg mb-1">{prod.name}</div>
