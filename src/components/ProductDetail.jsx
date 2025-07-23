@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const products = [
@@ -25,6 +25,23 @@ const products = [
 const ProductDetail = () => {
   const { productName } = useParams();
   const product = products.find(p => p.name.toLowerCase() === productName.toLowerCase());
+
+  // Onglet actif
+  const [activeTab, setActiveTab] = useState('description');
+
+  // Récupérer user du localStorage
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem('user'));
+  } catch {}
+
+  const [review, setReview] = useState({
+    rating: 0,
+    text: '',
+    name: user?.name || '',
+    email: user?.email || '',
+    save: false,
+  });
 
   if (!product) {
     return <div className="text-center py-20 text-xl">Product not found.</div>;
@@ -55,19 +72,55 @@ const ProductDetail = () => {
       {/* Onglets Description/Reviews */}
       <div className="max-w-5xl mx-auto mt-8 bg-white rounded-xl shadow p-6">
         <div className="flex gap-8 border-b border-gray-200 mb-4">
-          <button className="pb-2 font-semibold border-b-2 border-red-500 text-black focus:outline-none">Description</button>
-          <button className="pb-2 font-semibold text-gray-500 focus:outline-none">Reviews (0)</button>
+          <button onClick={() => setActiveTab('description')} className={`pb-2 font-semibold focus:outline-none ${activeTab === 'description' ? 'border-b-2 border-red-500 text-black' : 'text-gray-500'}`}>Description</button>
+          <button onClick={() => setActiveTab('reviews')} className={`pb-2 font-semibold focus:outline-none ${activeTab === 'reviews' ? 'border-b-2 border-red-500 text-black' : 'text-gray-500'}`}>Reviews (0)</button>
         </div>
-        <div>
-          <div className="font-bold mb-2">Description</div>
-          <ul className="list-disc pl-6 text-gray-700 space-y-1">
-            <li>Five listing submissions</li>
-            <li>180 days expiration</li>
-            <li>Submit your business</li>
-            <li>Create events</li>
-            <li>Rent real estate</li>
-          </ul>
-        </div>
+        {activeTab === 'description' && (
+          <div>
+            <div className="font-bold mb-2">Description</div>
+            <ul className="list-disc pl-6 text-gray-700 space-y-1">
+              <li>Five listing submissions</li>
+              <li>180 days expiration</li>
+              <li>Submit your business</li>
+              <li>Create events</li>
+              <li>Rent real estate</li>
+            </ul>
+          </div>
+        )}
+        {activeTab === 'reviews' && (
+          <form className="space-y-6 mt-2">
+            <div className="font-bold mb-2">Reviews</div>
+            <div className="text-gray-600 mb-2">There are no reviews yet.</div>
+            <div className="font-semibold mb-2">Be the first to review “{product.name}”</div>
+            <div className="mb-2">
+              <label className="block mb-1 font-medium">Your rating <span className="text-red-500">*</span></label>
+              <div className="flex gap-1">
+                {[1,2,3,4,5].map(star => (
+                  <button type="button" key={star} onClick={() => setReview(r => ({...r, rating: star}))} className="focus:outline-none">
+                    <svg className={`w-7 h-7 ${review.rating >= star ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" /></svg>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Your review <span className="text-red-500">*</span></label>
+              <textarea className="w-full border border-gray-300 rounded p-2 min-h-[80px]" value={review.text} onChange={e => setReview(r => ({...r, text: e.target.value}))} required />
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Name <span className="text-red-500">*</span></label>
+              <input className="w-full border border-gray-300 rounded p-2" value={review.name} onChange={e => setReview(r => ({...r, name: e.target.value}))} required />
+            </div>
+            <div>
+              <label className="block mb-1 font-medium">Email <span className="text-red-500">*</span></label>
+              <input className="w-full border border-gray-300 rounded p-2" value={review.email} onChange={e => setReview(r => ({...r, email: e.target.value}))} required type="email" />
+            </div>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" id="save" checked={review.save} onChange={e => setReview(r => ({...r, save: e.target.checked}))} />
+              <label htmlFor="save" className="text-gray-700 text-sm">Save my name, email, and website in this browser for the next time I comment.</label>
+            </div>
+            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded text-lg">Submit</button>
+          </form>
+        )}
       </div>
       {/* Related products */}
       <div className="max-w-5xl mx-auto mt-10">
