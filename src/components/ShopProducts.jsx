@@ -44,22 +44,22 @@ const ShopProducts = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
-      <div className="flex flex-row items-center justify-between gap-4 mb-6">
-        <div className="text-gray-700 text-base md:text-lg whitespace-nowrap">Showing all 3 results</div>
-        <div className="relative w-64" ref={sortRef}>
+      <div className="flex flex-row items-center justify-between gap-2 mb-6">
+        <div className="text-gray-700 text-sm whitespace-nowrap">Showing all 3 results</div>
+        <div className="relative w-40" ref={sortRef}>
           <button
-            className="flex items-center justify-between w-64 px-4 py-2 border-b border-gray-200 font-normal text-gray-900 bg-white focus:outline-none"
+            className="flex items-center justify-between w-40 px-2 py-1 border-b border-gray-200 font-normal text-gray-900 bg-white focus:outline-none text-sm"
             onClick={() => setSortOpen((o) => !o)}
           >
             {selectedSort}
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
           </button>
           {sortOpen && (
-            <div className="absolute right-0 mt-2 w-64 left-0 bg-white rounded shadow-lg border border-gray-100 z-30 animate-fade-in">
+            <div className="absolute right-0 mt-2 w-40 left-0 bg-white rounded shadow-lg border border-gray-100 z-30 animate-fade-in">
               {sortOptions.map((option) => (
                 <button
                   key={option}
-                  className={`w-full text-left px-4 py-3 text-gray-900 hover:bg-gray-50 font-normal ${selectedSort === option ? 'bg-gray-100' : ''}`}
+                  className={`w-full text-left px-3 py-2 text-gray-900 hover:bg-gray-50 font-normal text-sm ${selectedSort === option ? 'bg-gray-100' : ''}`}
                   onClick={() => { setSelectedSort(option); setSortOpen(false); }}
                 >
                   {option} {selectedSort === option && <span className="float-right">✔</span>}
