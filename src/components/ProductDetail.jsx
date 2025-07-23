@@ -132,22 +132,20 @@ const ProductDetail = () => {
       <div className="max-w-5xl mx-auto mt-10">
         <div className="font-bold text-lg mb-4">Related products</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {[0,1].map(i => (
-            products[i+1] ? (
-              <Link key={i} to={`/shop/${products[i+1].name}`} className="bg-white rounded-lg shadow flex flex-col items-center p-6 hover:shadow-lg transition cursor-pointer">
-                <div className="w-full aspect-square bg-red-400 flex items-center justify-center rounded mb-4">
-                  <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" strokeWidth="4" /><path d="M32 34v14" strokeWidth="4" /><path d="M22 48h20" strokeWidth="4" /><path d="M32 34l-8 8h16l-8-8z" strokeWidth="4" /><path d="M32 14v-4" strokeWidth="4" /><path d="M32 58c14-10 20-18 20-28A20 20 0 0 0 12 30c0 10 6 18 20 28z" strokeWidth="4" /></svg>
-                </div>
-                <div className="w-full flex flex-col items-start">
-                  <div className="font-bold text-lg mb-1">{products[i+1].name}</div>
-                  <div className="text-gray-500 mb-2">{products[i+1].price}</div>
-                  <button className="flex items-center gap-2 text-sm font-bold text-gray-800 mt-2 hover:underline" tabIndex={-1} onClick={e => e.preventDefault()}>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
-                    Add to cart
-                  </button>
-                </div>
-              </Link>
-            ) : null
+          {products.filter(p => p.name !== currentProduct.name).map((prod, i) => (
+            <Link key={prod.name} to={`/shop/${prod.name}`} className="bg-white rounded-lg shadow flex flex-col items-center p-6 hover:shadow-lg transition cursor-pointer">
+              <div className="w-full aspect-square bg-red-400 flex items-center justify-center rounded mb-4">
+                <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" strokeWidth="4" /><path d="M32 34v14" strokeWidth="4" /><path d="M22 48h20" strokeWidth="4" /><path d="M32 34l-8 8h16l-8-8z" strokeWidth="4" /><path d="M32 14v-4" strokeWidth="4" /><path d="M32 58c14-10 20-18 20-28A20 20 0 0 0 12 30c0 10 6 18 20 28z" strokeWidth="4" /></svg>
+              </div>
+              <div className="w-full flex flex-col items-start">
+                <div className="font-bold text-lg mb-1">{prod.name}</div>
+                <div className="text-gray-500 mb-2">{prod.price}</div>
+                <button className="flex items-center gap-2 text-sm font-bold text-gray-800 mt-2 hover:underline" tabIndex={-1} onClick={e => e.preventDefault()}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
+                  Add to cart
+                </button>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
