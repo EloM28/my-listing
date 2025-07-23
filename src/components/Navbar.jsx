@@ -83,8 +83,8 @@ const Navbar = () => {
     ],
     More: [
       { label: "Blog", href: "#" },
-      { label: "Shop 2", href: "#" },
-      { label: "Add listing 3", href: "#" },
+      { label: "Shop", href: "/shop" },
+      { label: "Add A listing", href: "/add-listing" },
     ],
   };
 
