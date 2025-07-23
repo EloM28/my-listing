@@ -58,69 +58,69 @@ const ProductDetail = () => {
         </div>
         {/* Infos */}
         <div className="flex-1 max-w-xl w-full bg-white rounded-xl shadow p-8 flex flex-col items-center mx-auto">
-          <div className="text-2xl font-bold mb-2 text-center">{product.name}</div>
+          {/* <div className="text-2xl font-bold mb-2 text-center">{product.name}</div>
           <div className="text-lg text-gray-700 mb-4 text-center">{product.price}</div>
-          <button className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded mb-4 w-47 justify-center">
+           <button className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded mb-4 w-47 justify-center">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
             Add to cart
-          </button>
-          <div className="w-full flex justify-center">
+          </button>  */}
+          {/* Bloc tabs Description/Reviews intégré ici */}
+          <div className="w-full mt-2">
+            <div className="flex gap-8 border-b border-gray-200 mb-4">
+              <button onClick={() => setActiveTab('description')} className={`pb-2 font-semibold focus:outline-none ${activeTab === 'description' ? 'border-b-2 border-red-500 text-black' : 'text-gray-500'}`}>Description</button>
+              <button onClick={() => setActiveTab('reviews')} className={`pb-2 font-semibold focus:outline-none ${activeTab === 'reviews' ? 'border-b-2 border-red-500 text-black' : 'text-gray-500'}`}>Reviews (0)</button>
+            </div>
+            {activeTab === 'description' && (
+              <div>
+                <div className="font-bold mb-2">Description</div>
+                <ul className="list-disc pl-6 text-gray-700 space-y-1">
+                  <li>Five listing submissions</li>
+                  <li>180 days expiration</li>
+                  <li>Submit your business</li>
+                  <li>Create events</li>
+                  <li>Rent real estate</li>
+                </ul>
+              </div>
+            )}
+            {activeTab === 'reviews' && (
+              <form className="space-y-6 mt-2">
+                <div className="font-bold mb-2">Reviews</div>
+                <div className="text-gray-600 mb-2">There are no reviews yet.</div>
+                <div className="font-semibold mb-2">Be the first to review “{product.name}”</div>
+                <div>
+                  <label className="block mb-1 font-medium">Your rating <span className="text-red-500">*</span></label>
+                  <div className="flex gap-1">
+                    {[1,2,3,4,5].map(star => (
+                      <button type="button" key={star} onClick={() => setReview(r => ({...r, rating: star}))} className="focus:outline-none">
+                        <svg className={`w-7 h-7 ${review.rating >= star ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" /></svg>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium">Your review <span className="text-red-500">*</span></label>
+                  <textarea className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 min-h-[80px] focus:ring-0 focus:outline-none" value={review.text} onChange={e => setReview(r => ({...r, text: e.target.value}))} required />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium">Name <span className="text-red-500">*</span></label>
+                  <input className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 focus:ring-0 focus:outline-none" value={review.name} onChange={e => setReview(r => ({...r, name: e.target.value}))} required />
+                </div>
+                <div>
+                  <label className="block mb-1 font-medium">Email <span className="text-red-500">*</span></label>
+                  <input className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 focus:ring-0 focus:outline-none" value={review.email} onChange={e => setReview(r => ({...r, email: e.target.value}))} required type="email" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <input type="checkbox" id="save" checked={review.save} onChange={e => setReview(r => ({...r, save: e.target.checked}))} />
+                  <label htmlFor="save" className="text-gray-700 text-sm">Save my name, email, and website in this browser for the next time I comment.</label>
+                </div>
+                <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded text-lg">Submit</button>
+              </form>
+            )}
+          </div>
+          <div className="w-full flex justify-center mt-4">
             <span className="inline-block border border-gray-300 rounded px-4 py-2 text-gray-700 text-sm">{product.category}</span>
           </div>
         </div>
-      </div>
-      {/* Onglets Description/Reviews */}
-      <div className="max-w-5xl mx-auto mt-8 bg-white rounded-xl shadow p-6">
-        <div className="flex gap-8 border-b border-gray-200 mb-4">
-          <button onClick={() => setActiveTab('description')} className={`pb-2 font-semibold focus:outline-none ${activeTab === 'description' ? 'border-b-2 border-red-500 text-black' : 'text-gray-500'}`}>Description</button>
-          <button onClick={() => setActiveTab('reviews')} className={`pb-2 font-semibold focus:outline-none ${activeTab === 'reviews' ? 'border-b-2 border-red-500 text-black' : 'text-gray-500'}`}>Reviews (0)</button>
-        </div>
-        {activeTab === 'description' && (
-          <div>
-            <div className="font-bold mb-2">Description</div>
-            <ul className="list-disc pl-6 text-gray-700 space-y-1">
-              <li>Five listing submissions</li>
-              <li>180 days expiration</li>
-              <li>Submit your business</li>
-              <li>Create events</li>
-              <li>Rent real estate</li>
-            </ul>
-          </div>
-        )}
-        {activeTab === 'reviews' && (
-          <form className="space-y-6 mt-2">
-            <div className="font-bold mb-2">Reviews</div>
-            <div className="text-gray-600 mb-2">There are no reviews yet.</div>
-            <div className="font-semibold mb-2">Be the first to review “{product.name}”</div>
-            <div>
-              <label className="block mb-1 font-medium">Your rating <span className="text-red-500">*</span></label>
-              <div className="flex gap-1">
-                {[1,2,3,4,5].map(star => (
-                  <button type="button" key={star} onClick={() => setReview(r => ({...r, rating: star}))} className="focus:outline-none">
-                    <svg className={`w-7 h-7 ${review.rating >= star ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.454a1 1 0 00-1.175 0l-3.38 2.454c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.049 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z" /></svg>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="block mb-1 font-medium">Your review <span className="text-red-500">*</span></label>
-              <textarea className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 min-h-[80px] focus:ring-0 focus:outline-none" value={review.text} onChange={e => setReview(r => ({...r, text: e.target.value}))} required />
-            </div>
-            <div>
-              <label className="block mb-1 font-medium">Name <span className="text-red-500">*</span></label>
-              <input className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 focus:ring-0 focus:outline-none" value={review.name} onChange={e => setReview(r => ({...r, name: e.target.value}))} required />
-            </div>
-            <div>
-              <label className="block mb-1 font-medium">Email <span className="text-red-500">*</span></label>
-              <input className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 focus:ring-0 focus:outline-none" value={review.email} onChange={e => setReview(r => ({...r, email: e.target.value}))} required type="email" />
-            </div>
-            <div className="flex items-center gap-2">
-              <input type="checkbox" id="save" checked={review.save} onChange={e => setReview(r => ({...r, save: e.target.checked}))} />
-              <label htmlFor="save" className="text-gray-700 text-sm">Save my name, email, and website in this browser for the next time I comment.</label>
-            </div>
-            <button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded text-lg">Submit</button>
-          </form>
-        )}
       </div>
       {/* Related products */}
       <div className="max-w-5xl mx-auto mt-10">
