@@ -87,6 +87,7 @@ const ProductDetail = () => {
                   <li>Submit your business</li>
                   <li>Create events</li>
                   <li>Rent real estate</li>
+                  <li>price : {currentProduct.price}</li>
                 </ul>
               </div>
             )}
