@@ -21,6 +21,7 @@ import AddListing from './components/AddListing';
 import ChoosePackage from './components/ChoosePackage';
 import ListingForm from './components/ListingForm';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import ShopProducts from './components/ShopProducts';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
               </>
               
             } />
+            <Route path="/shop" element={<ShopProducts />} />
             <Route path="/ListingPage" element={<ListingPage />} />
             <Route path="/salelist" element={<RentSale />} />
           <Route path="/rentlist" element={<RentList />} />
