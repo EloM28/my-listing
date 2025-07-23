@@ -25,9 +25,9 @@ const FooterSection = () => (
         <a href="#" className="bg-gray-100 hover:bg-red-500 hover:text-white rounded-full w-10 h-10 flex items-center justify-center text-gray-700 text-xl transition"><FaYoutube /></a>
       </div>
       <div className="text-gray-500 text-sm flex items-center gap-1">
-        <span>© Made with</span>
+        <span>&copy; Made with</span>
         <span className="text-[#ff4d5a] text-lg">♥</span>
-        <span>by NexusX</span>
+        <a href="https://nexusx.bi" target="blank">by NexusX</a>
       </div>
     </div>
   </footer>
