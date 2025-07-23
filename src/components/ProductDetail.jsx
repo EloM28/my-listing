@@ -42,7 +42,7 @@ const ProductDetail = () => {
       <div className="flex-1 max-w-xl w-full bg-white rounded-xl shadow p-8 flex flex-col items-center mx-auto">
         <div className="text-2xl font-bold mb-2 text-center">{product.name}</div>
         <div className="text-lg text-gray-700 mb-4 text-center">{product.price}</div>
-        <button className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded mb-4 w-full justify-center">
+        <button className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded mb-4 w-47 justify-center">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
           Add to cart
         </button>
