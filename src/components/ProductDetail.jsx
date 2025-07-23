@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 
 const products = [
   {
@@ -24,9 +24,7 @@ const products = [
 
 const ProductDetail = () => {
   const { productName } = useParams();
-  const product = products.find(p => p.name.toLowerCase() === productName.toLowerCase());
-
-  // Onglet actif
+  const [currentProduct, setCurrentProduct] = useState(() => products.find(p => p.name.toLowerCase() === productName.toLowerCase()));
   const [activeTab, setActiveTab] = useState('description');
 
   // Récupérer user du localStorage
@@ -43,7 +41,13 @@ const ProductDetail = () => {
     save: false,
   });
 
-  if (!product) {
+  // Mettre à jour le produit et reset le tab à chaque changement d'URL
+  useEffect(() => {
+    setCurrentProduct(products.find(p => p.name.toLowerCase() === productName.toLowerCase()));
+    setActiveTab('description');
+  }, [productName]);
+
+  if (!currentProduct) {
     return <div className="text-center py-20 text-xl">Product not found.</div>;
   }
 
@@ -58,12 +62,16 @@ const ProductDetail = () => {
         </div>
         {/* Infos */}
         <div className="flex-1 max-w-xl w-full bg-white rounded-xl shadow p-8 flex flex-col items-center mx-auto">
-          {/* <div className="text-2xl font-bold mb-2 text-center">{product.name}</div>
-          <div className="text-lg text-gray-700 mb-4 text-center">{product.price}</div>
+           <div className="text-2xl font-bold mb-2 text-center">{currentProduct.name}</div>
+          {/*<div className="text-lg text-gray-700 mb-4 text-center">{product.price}</div>
            <button className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded mb-4 w-47 justify-center">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
             Add to cart
-          </button>  */}
+          </button> 
+          <div className="w-full flex justify-center mt-4">
+            <span className="inline-block border border-gray-300 rounded px-4 py-2 text-gray-700 text-sm">{product.category}</span>
+          </div>
+          */}
           {/* Bloc tabs Description/Reviews intégré ici */}
           <div className="w-full mt-2">
             <div className="flex gap-8 border-b border-gray-200 mb-4">
@@ -86,7 +94,7 @@ const ProductDetail = () => {
               <form className="space-y-6 mt-2">
                 <div className="font-bold mb-2">Reviews</div>
                 <div className="text-gray-600 mb-2">There are no reviews yet.</div>
-                <div className="font-semibold mb-2">Be the first to review “{product.name}”</div>
+                <div className="font-semibold mb-2">Be the first to review “{currentProduct.name}”</div>
                 <div>
                   <label className="block mb-1 font-medium">Your rating <span className="text-red-500">*</span></label>
                   <div className="flex gap-1">
@@ -117,9 +125,7 @@ const ProductDetail = () => {
               </form>
             )}
           </div>
-          <div className="w-full flex justify-center mt-4">
-            <span className="inline-block border border-gray-300 rounded px-4 py-2 text-gray-700 text-sm">{product.category}</span>
-          </div>
+          
         </div>
       </div>
       {/* Related products */}
@@ -127,19 +133,21 @@ const ProductDetail = () => {
         <div className="font-bold text-lg mb-4">Related products</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {[0,1].map(i => (
-            <div key={i} className="bg-white rounded-lg shadow flex flex-col items-center p-6">
-              <div className="w-full aspect-square bg-red-400 flex items-center justify-center rounded mb-4">
-                <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" strokeWidth="4" /><path d="M32 34v14" strokeWidth="4" /><path d="M22 48h20" strokeWidth="4" /><path d="M32 34l-8 8h16l-8-8z" strokeWidth="4" /><path d="M32 14v-4" strokeWidth="4" /><path d="M32 58c14-10 20-18 20-28A20 20 0 0 0 12 30c0 10 6 18 20 28z" strokeWidth="4" /></svg>
-              </div>
-              <div className="w-full flex flex-col items-start">
-                <div className="font-bold text-lg mb-1">{products[i+1]?.name || 'Product'}</div>
-                <div className="text-gray-500 mb-2">{products[i+1]?.price || '---'}</div>
-                <button className="flex items-center gap-2 text-sm font-bold text-gray-800 mt-2 hover:underline">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
-                  Add to cart
-                </button>
-              </div>
-            </div>
+            products[i+1] ? (
+              <Link key={i} to={`/shop/${products[i+1].name}`} className="bg-white rounded-lg shadow flex flex-col items-center p-6 hover:shadow-lg transition cursor-pointer">
+                <div className="w-full aspect-square bg-red-400 flex items-center justify-center rounded mb-4">
+                  <svg className="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 64 64"><circle cx="32" cy="24" r="10" strokeWidth="4" /><path d="M32 34v14" strokeWidth="4" /><path d="M22 48h20" strokeWidth="4" /><path d="M32 34l-8 8h16l-8-8z" strokeWidth="4" /><path d="M32 14v-4" strokeWidth="4" /><path d="M32 58c14-10 20-18 20-28A20 20 0 0 0 12 30c0 10 6 18 20 28z" strokeWidth="4" /></svg>
+                </div>
+                <div className="w-full flex flex-col items-start">
+                  <div className="font-bold text-lg mb-1">{products[i+1].name}</div>
+                  <div className="text-gray-500 mb-2">{products[i+1].price}</div>
+                  <button className="flex items-center gap-2 text-sm font-bold text-gray-800 mt-2 hover:underline" tabIndex={-1} onClick={e => e.preventDefault()}>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h18v2H3zm0 4h18v2H3zm0 4h18v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6z" /></svg>
+                    Add to cart
+                  </button>
+                </div>
+              </Link>
+            ) : null
           ))}
         </div>
       </div>
