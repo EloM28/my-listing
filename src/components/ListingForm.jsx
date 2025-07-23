@@ -115,14 +115,6 @@ const ListingForm = () => {
                     <label className="font-medium">Tagline<input className={inputClass} type="text" placeholder="Tagline" /></label>
                     <label className="font-medium">
                       Description
-                      {/* <ReactQuill
-                        ref={quillRef}
-                        className={inputClass + " resize-none min-h-[80px]"}
-                        theme="snow"
-                        value={description}
-                        onChange={setDescription}
-                        placeholder="Description"
-                      /> */}
                       <QuillEditor
                         ref={quillRef}
                         readOnly={readOnly}
@@ -130,20 +122,6 @@ const ListingForm = () => {
                         onTextChange={setLastChange}
                     />
                     </label>
-                    {/* <Editor
-                      ref={quillRef}
-                      readOnly={readOnly}
-                      defaultValue={new Delta()
-                        .insert('Hello')
-                        .insert('\n', { header: 1 })
-                        .insert('Some ')
-                        .insert('initial', { bold: true })
-                        .insert(' ')
-                        .insert('content', { underline: true })
-                        .insert('\n')}
-                      onSelectionChange={setRange}
-                      onTextChange={setLastChange}
-                    /> */}
                   </>
                 )}
                 {s.id === "images" && (
