@@ -82,7 +82,7 @@ const Navbar = () => {
       { label: "For sale listings", href: "/salelist" },
     ],
     More: [
-      { label: "Blog", href: "#" },
+      // { label: "Blog", href: "#" },
       { label: "Shop", href: "/shop" },
       { label: "Add A listing", href: "/add-listing" },
     ],
@@ -195,7 +195,7 @@ const Navbar = () => {
             </button>
             {openDropdown === 'More' && (
               <div className="absolute left-0 w-48 bg-white rounded shadow-lg z-20">
-                <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a>
+                {/* <a href="#" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Blog</a> */}
                 <Link to="/shop" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Shop</Link>
                 <Link to="/add-listing" onClick={() => setOpenDropdown('')} className="block px-4 py-2 hover:bg-gray-100 text-sm md:text-base">Add A listing</Link>
               </div>
@@ -283,9 +283,9 @@ const Navbar = () => {
           >
             <svg className="w-7 h-7 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
-          <a href="#" className="flex items-center gap-1">
+          <Link to="/" className="flex items-center gap-1">
             <svg className="w-9 h-9 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 22s8-4.5 8-10V7.236A2.236 2.236 0 0017.764 5H6.236A2.236 2.236 0 004 7.236V12c0 5.5 8 10 8 10z" /><circle cx="12" cy="10" r="3" /></svg>
-          </a>
+          </Link>
         </div>
         {/* Right: panier, search icon (dropdown), user icon */}
         <div className="flex items-center gap-2">
