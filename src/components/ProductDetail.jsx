@@ -92,7 +92,7 @@ const ProductDetail = () => {
             <div className="font-bold mb-2">Reviews</div>
             <div className="text-gray-600 mb-2">There are no reviews yet.</div>
             <div className="font-semibold mb-2">Be the first to review “{product.name}”</div>
-            <div className="mb-2">
+            <div>
               <label className="block mb-1 font-medium">Your rating <span className="text-red-500">*</span></label>
               <div className="flex gap-1">
                 {[1,2,3,4,5].map(star => (
@@ -104,15 +104,15 @@ const ProductDetail = () => {
             </div>
             <div>
               <label className="block mb-1 font-medium">Your review <span className="text-red-500">*</span></label>
-              <textarea className="w-full border border-gray-300 rounded p-2 min-h-[80px]" value={review.text} onChange={e => setReview(r => ({...r, text: e.target.value}))} required />
+              <textarea className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 min-h-[80px] focus:ring-0 focus:outline-none" value={review.text} onChange={e => setReview(r => ({...r, text: e.target.value}))} required />
             </div>
             <div>
               <label className="block mb-1 font-medium">Name <span className="text-red-500">*</span></label>
-              <input className="w-full border border-gray-300 rounded p-2" value={review.name} onChange={e => setReview(r => ({...r, name: e.target.value}))} required />
+              <input className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 focus:ring-0 focus:outline-none" value={review.name} onChange={e => setReview(r => ({...r, name: e.target.value}))} required />
             </div>
             <div>
               <label className="block mb-1 font-medium">Email <span className="text-red-500">*</span></label>
-              <input className="w-full border border-gray-300 rounded p-2" value={review.email} onChange={e => setReview(r => ({...r, email: e.target.value}))} required type="email" />
+              <input className="w-full border-0 border-b border-gray-300 focus:border-red-500 rounded-none shadow-none p-0 focus:ring-0 focus:outline-none" value={review.email} onChange={e => setReview(r => ({...r, email: e.target.value}))} required type="email" />
             </div>
             <div className="flex items-center gap-2">
               <input type="checkbox" id="save" checked={review.save} onChange={e => setReview(r => ({...r, save: e.target.checked}))} />
